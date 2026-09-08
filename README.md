@@ -88,8 +88,10 @@ whether you should have put a queue there. Three graders:
 | **The Friday defence** | whether you can hold it under attack | no |
 
 **1,086 lab tests** across all twelve weeks, and every one of them fails before you
-write anything. The 24 tests in `tests/` are the harness's own plus a few repo guards, and
-they ship green — you use `simlib`, you do not build it.
+write anything. The 24 tests in `tests/` are the harness's own plus four repo guards, and they ship
+green — you use `simlib`, you do not build it. One of the four skips for you: it checks
+that every lab has a reference solution, and the solutions are in your instructor's
+private repository rather than yours.
 
 ---
 
