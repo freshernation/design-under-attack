@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" width="760" height="300" role="img" aria-label="Two concurrent edits, transformed against each other, converging on the same document">
+  <rect width="760" height="300" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="380" y="30" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="700" fill="#0f172a">Two people type at once. Both must end up with the same document.</text>
+
+  <text x="60" y="66" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#1e3a8a">Ana</text>
+  <text x="560" y="66" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#166534">Bo</text>
+  <text x="330" y="66" font-family="ui-monospace,Menlo,monospace" font-size="12" fill="#334155">&quot;HELLO&quot;</text>
+
+  <g font-family="ui-monospace,Menlo,monospace" font-size="11" fill="#334155">
+    <rect x="40" y="82" width="200" height="40" rx="5" fill="#dbeafe" stroke="#93c5fd"/>
+    <text x="54" y="107">insert(0, &quot;X&quot;) &#8594; &quot;XHELLO&quot;</text>
+
+    <rect x="520" y="82" width="200" height="40" rx="5" fill="#dcfce7" stroke="#86efac"/>
+    <text x="534" y="107">delete(4) &#8594; &quot;HELL&quot;</text>
+  </g>
+
+  <g stroke="#94a3b8" stroke-width="1.4" fill="none" marker-end="url(#w10a)">
+    <path d="M240 102 H370"/><path d="M520 102 H390"/>
+  </g>
+  <defs><marker id="w10a" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="#94a3b8"/></marker></defs>
+
+  <rect x="230" y="140" width="300" height="56" rx="6" fill="#fef3c7" stroke="#fcd34d"/>
+  <text x="380" y="162" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" font-weight="600" fill="#92400e">Bo&#8217;s delete(4) must become delete(5)</text>
+  <text x="380" y="182" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#334155">because Ana inserted a character before it</text>
+
+  <g font-family="ui-monospace,Menlo,monospace" font-size="12">
+    <rect x="230" y="216" width="300" height="40" rx="5" fill="#fff" stroke="#22c55e" stroke-width="2"/>
+    <text x="380" y="241" text-anchor="middle" fill="#166534">both converge on &quot;XHELL&quot;</text>
+  </g>
+
+  <text x="40" y="284" font-family="system-ui,sans-serif" font-size="11" fill="#334155">Apply the raw operation and Ana gets &quot;XHELL&quot; while Bo gets &quot;XHELO&quot;. Two documents, no error, and nobody can tell whose is right.</text>
+</svg>

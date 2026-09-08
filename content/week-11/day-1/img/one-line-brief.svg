@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" width="760" height="300" role="img" aria-label="One sentence expanding into requirements, an envelope, and non-goals">
+  <rect width="760" height="300" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="380" y="30" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="700" fill="#0f172a">One sentence, and everything you are not told</text>
+
+  <rect x="200" y="52" width="360" height="34" rx="6" fill="#fff" stroke="#cbd5e1"/>
+  <text x="380" y="74" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="12" fill="#0f172a">&quot;Let people share files with each other.&quot;</text>
+
+  <g stroke="#94a3b8" stroke-width="1.4" fill="none" marker-end="url(#w11a)">
+    <path d="M300 88 L150 116"/><path d="M380 88 V116"/><path d="M460 88 L610 116"/>
+  </g>
+  <defs><marker id="w11a" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="#94a3b8"/></marker></defs>
+
+  <g font-family="system-ui,sans-serif" font-size="11">
+    <rect x="30" y="120" width="220" height="120" rx="6" fill="#dbeafe" stroke="#93c5fd"/>
+    <text x="46" y="142" font-weight="700" fill="#1e3a8a">Asked, and answered</text>
+    <text x="46" y="164" fill="#334155">How many users, how often?</text>
+    <text x="46" y="182" fill="#334155">How large is a file?</text>
+    <text x="46" y="200" fill="#334155">Who may see it?</text>
+    <text x="46" y="218" fill="#334155">How fast must a share appear?</text>
+
+    <rect x="270" y="120" width="220" height="120" rx="6" fill="#dcfce7" stroke="#86efac"/>
+    <text x="286" y="142" font-weight="700" fill="#166534">Assumed, and written down</text>
+    <text x="286" y="164" fill="#334155">Peak is 5x the average</text>
+    <text x="286" y="182" fill="#334155">Median file 400 KB</text>
+    <text x="286" y="200" fill="#334155">99% of shares are to</text>
+    <text x="286" y="218" fill="#334155">fewer than 10 people</text>
+
+    <rect x="510" y="120" width="220" height="120" rx="6" fill="#fef3c7" stroke="#fcd34d"/>
+    <text x="526" y="142" font-weight="700" fill="#92400e">Not building</text>
+    <text x="526" y="164" fill="#334155">Editing · versioning</text>
+    <text x="526" y="182" fill="#334155">Comments · search</text>
+    <text x="526" y="200" fill="#334155">Mobile offline sync</text>
+    <text x="526" y="218" fill="#334155">Virus scanning</text>
+  </g>
+
+  <text x="30" y="266" font-family="system-ui,sans-serif" font-size="11" fill="#334155">The middle box is the one that separates an engineer from a candidate. An assumption written down can be attacked, corrected,</text>
+  <text x="30" y="284" font-family="system-ui,sans-serif" font-size="11" fill="#334155">and costed. An assumption left in your head is a decision nobody knows was made.</text>
+</svg>

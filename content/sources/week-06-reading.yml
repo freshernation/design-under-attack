@@ -1,0 +1,202 @@
+# Week 6's reading, recorded properly.
+
+system: Week 6 reading — caching, invalidation, stampedes, filters, the edge
+
+sources:
+  - id: fb-memcache-2013
+    title: Scaling Memcache at Facebook
+    url: https://www.usenix.org/system/files/conference/nsdi13/nsdi13-final170_update.pdf
+    publisher: Facebook
+    author: Nishtala et al.
+    kind: paper
+    runs_the_system: true
+    tier: 1
+    published: 2013
+    retrieved: 2026-09-02
+    note: >-
+      The single best primary source on caching. §3.2 for leases and the stale-set race,
+      §3.2.1 for stampedes, §4 for the regional and cross-region complications.
+
+  - id: redis-eviction
+    title: "Redis — key eviction"
+    url: https://redis.io/docs/latest/develop/reference/eviction/
+    publisher: Redis
+    kind: official_docs
+    runs_the_system: true
+    tier: 1
+    undated: true
+    retrieved: 2026-09-02
+
+  - id: memcached-wiki
+    title: Memcached wiki
+    url: https://github.com/memcached/memcached/wiki
+    publisher: Memcached
+    kind: official_docs
+    runs_the_system: true
+    tier: 1
+    undated: true
+    retrieved: 2026-09-02
+    note: The slab allocator, and why memory accounting in a cache is not simple
+
+  - id: cache-stampede-2015
+    title: Optimal Probabilistic Cache Stampede Prevention
+    url: https://cseweb.ucsd.edu/~avattani/papers/cache_stampede.pdf
+    publisher: VLDB
+    author: Vattani, Chierichetti, Lowenstein
+    kind: paper
+    tier: 2
+    published: 2015
+    retrieved: 2026-09-02
+    note: Early recomputation with a proof, rather than folklore
+
+  - id: rfc-9111
+    title: "RFC 9111 — HTTP Caching"
+    url: https://www.rfc-editor.org/rfc/rfc9111
+    publisher: IETF
+    kind: spec
+    tier: 2
+    published: 2022-06
+    retrieved: 2026-09-02
+
+  - id: mdn-http-caching
+    title: "MDN — HTTP caching"
+    url: https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching
+    publisher: Mozilla
+    kind: official_docs
+    tier: 2
+    undated: true
+    retrieved: 2026-09-02
+
+  - id: cloudflare-cache
+    title: "Cloudflare — Cache"
+    url: https://developers.cloudflare.com/cache/
+    publisher: Cloudflare
+    kind: official_docs
+    runs_the_system: true
+    tier: 1
+    undated: true
+    retrieved: 2026-09-02
+    note: A CDN operator on cache keys, purge and tiered caching
+
+  - id: netflix-open-connect
+    title: Netflix Open Connect
+    url: https://openconnect.netflix.com/
+    publisher: Netflix
+    runs_the_system: true
+    tier: 1
+    undated: true
+    retrieved: 2026-09-02
+    note: Where the economics invert and the CDN becomes the architecture
+
+  - id: rocksdb-overview
+    title: RocksDB Overview
+    url: https://github.com/facebook/rocksdb/wiki/RocksDB-Overview
+    publisher: Meta
+    kind: official_docs
+    runs_the_system: true
+    tier: 1
+    undated: true
+    retrieved: 2026-09-02
+    note: Where week 3's read amplification went — the filter is what fixed it
+
+  - id: bloom-1970
+    title: "Space/time trade-offs in hash coding with allowable errors"
+    url: https://doi.org/10.1145/362686.362692
+    publisher: Communications of the ACM
+    author: Burton H. Bloom
+    kind: paper
+    tier: 2
+    published: 1970
+    retrieved: 2026-09-02
+    manual: true
+    note: Paywalled. Cited by name and DOI
+
+claims:
+  - id: leases-prevent-stale-sets
+    text: >-
+      A cache can issue a token on a miss and refuse a set from a client whose token has
+      been superseded, which prevents a slow reader caching a value that a later write
+      already replaced.
+    kind: known
+    sources: [fb-memcache-2013]
+
+  - id: leases-prevent-stampedes
+    text: >-
+      The same token mechanism limits how many clients simultaneously load a missing key
+      from the origin.
+    kind: known
+    sources: [fb-memcache-2013]
+
+  - id: early-recomputation
+    text: >-
+      Refreshing a cached value probabilistically before it expires, with the probability
+      rising as expiry approaches, prevents stampedes without ever serving a miss.
+    kind: known
+    sources: [cache-stampede-2015]
+
+  - id: stale-while-revalidate
+    text: >-
+      HTTP allows a cache to serve a stale response while revalidating it in the
+      background.
+    kind: known
+    sources: [rfc-9111, mdn-http-caching]
+
+  - id: s-maxage-is-for-shared-caches
+    text: >-
+      `s-maxage` applies only to shared caches, allowing a longer lifetime where purging is
+      possible than in a browser where it is not.
+    kind: known
+    sources: [rfc-9111, cloudflare-cache]
+
+  - id: filters-cut-read-amplification
+    text: >-
+      A per-file membership filter lets a log-structured store skip files that cannot
+      contain a key, taking read amplification from the file count to roughly one.
+    kind: known
+    sources: [rocksdb-overview]
+
+  - id: no-false-negatives
+    text: >-
+      A bloom filter never reports that a key is absent when it was added; only false
+      positives are possible.
+    kind: known
+    sources: [bloom-1970]
+
+  - id: cache-is-an-unmanaged-replica
+    text: >-
+      A cache is a replica with no consistency protocol, so every replication question
+      from week 5 applies to it.
+    kind: inferred
+    sources: [fb-memcache-2013]
+    note: Our framing. The paper demonstrates it repeatedly without putting it this way
+
+  - id: hit-rate-is-a-capacity-dependency
+    text: >-
+      Hit rate determines origin load non-linearly, so a small degradation multiplies the
+      load on a component sized for a fraction of it.
+    kind: inferred
+    sources: [fb-memcache-2013]
+    note: Arithmetic, plus the paper's account of what happens when a cache tier is lost
+
+  - id: ttl-does-not-help-a-long-tail
+    text: >-
+      For keys read less often than the TTL, caching absorbs nothing — every read is a
+      miss regardless of the TTL.
+    kind: derived
+    note: >-
+      Arithmetic, worked in the week-6 milestone lab. We have found no source that states
+      it, which is why the milestone makes students compute it rather than asserting it.
+
+  - id: real-hit-rates
+    text: >-
+      What hit rates large production caches actually sustain, and how much they degrade
+      during an incident.
+    kind: unknown
+
+  - id: purge-propagation
+    text: >-
+      How long a CDN purge takes to reach every edge location.
+    kind: unknown
+    note: >-
+      Varies by provider and is rarely published with a percentile. Check your provider's
+      documentation and put their number in your envelope rather than a remembered one.

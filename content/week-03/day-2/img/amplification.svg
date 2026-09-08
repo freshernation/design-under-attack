@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 260" width="760" height="260" role="img" aria-label="Write, read and space amplification, and the trade between them">
+  <rect width="760" height="260" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="380" y="30" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="700" fill="#0f172a">Three amplifications. You may improve two.</text>
+
+  <g font-family="system-ui,sans-serif" font-size="12">
+    <g>
+      <rect x="28" y="52" width="228" height="98" rx="6" fill="#fff" stroke="#cbd5e1"/>
+      <text x="44" y="74" font-weight="700" fill="#0f172a">Write</text>
+      <text x="44" y="96" fill="#475569" font-family="ui-monospace,Menlo,monospace" font-size="11">bytes to disk / bytes from app</text>
+      <text x="44" y="120" fill="#334155">100-byte row into an 8 KB page</text>
+      <text x="44" y="138" fill="#334155">is 80x, before any indexes</text>
+    </g>
+    <g>
+      <rect x="266" y="52" width="228" height="98" rx="6" fill="#fff" stroke="#cbd5e1"/>
+      <text x="282" y="74" font-weight="700" fill="#0f172a">Read</text>
+      <text x="282" y="96" fill="#475569" font-family="ui-monospace,Menlo,monospace" font-size="11">disk reads / logical read</text>
+      <text x="282" y="120" fill="#334155">an LSM may check every file</text>
+      <text x="282" y="138" fill="#334155">until a filter says it need not</text>
+    </g>
+    <g>
+      <rect x="504" y="52" width="228" height="98" rx="6" fill="#fff" stroke="#cbd5e1"/>
+      <text x="520" y="74" font-weight="700" fill="#0f172a">Space</text>
+      <text x="520" y="96" fill="#475569" font-family="ui-monospace,Menlo,monospace" font-size="11">bytes stored / bytes live</text>
+      <text x="520" y="120" fill="#334155">obsolete versions and tombstones</text>
+      <text x="520" y="138" fill="#334155">until compaction removes them</text>
+    </g>
+  </g>
+
+  <rect x="28" y="166" width="704" height="72" rx="6" fill="#fffbeb" stroke="#fcd34d"/>
+  <g font-family="system-ui,sans-serif" font-size="12" fill="#92400e">
+    <text x="46" y="190" font-weight="600">Leveled compaction</text>
+    <text x="46" y="212" fill="#334155">low read and space amplification, high write amplification</text>
+    <text x="420" y="190" font-weight="600">Tiered compaction</text>
+    <text x="420" y="212" fill="#334155">low write amplification, high read and space amplification</text>
+  </g>
+  <text x="46" y="230" font-family="system-ui,sans-serif" font-size="11" fill="#64748b">Same data, same engine, one config line. It is a choice about which cost you would rather pay.</text>
+</svg>

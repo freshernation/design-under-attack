@@ -1,0 +1,45 @@
+# Week 12's reading. The shortest source file in the course, deliberately.
+
+system: Week 12 reading — the interview
+
+no_sources_reason: >-
+  There is no primary source for interviewing. Week 12's three articles cite nothing and
+  say so at the top of each; every claim below is therefore either an acknowledged unknown
+  or a teaching device derived from the course's own premise.
+
+sources: []
+
+claims:
+  - id: no-sources-for-interviewing
+    text: >-
+      There is no primary source for how to conduct or pass a system design interview.
+    kind: unknown
+    note: >-
+      Week 12's three articles cite nothing, and say so at the top of each. Published
+      interview advice is overwhelmingly tier 3 and tier 4 — folklore repeated until it
+      sounded true — and presenting ours as anything else would undo twelve weeks of
+      insisting on provenance.
+
+      What the articles rest on is the course's own premise: a design is a set of
+      decisions, so a conversation about a design should be too. That is an argument, and
+      students are told to discard any part of it that does not survive contact with a real
+      interview.
+
+  - id: what-interviewers-assess
+    text: >-
+      What system design interviewers at any particular company actually score.
+    kind: unknown
+    note: >-
+      Varies by company, by interviewer, and by level. Some publish rubrics; none publishes
+      the one it uses. Treat every confident account of "what they are looking for",
+      including ours, as a guess with reasoning attached.
+
+  - id: the-scoring-rubric
+    text: >-
+      The seven-pass rubric used in the week-12 lab — any pass below 3 is a no-hire,
+      readiness is three consecutive passes.
+    kind: derived
+    note: >-
+      Ours, and it is a teaching device rather than anybody's real rubric. The thresholds
+      encode two arguments: that a collapsed pass is not compensated by strong ones, and
+      that one good performance is a good day while three is a skill. Argue with them.

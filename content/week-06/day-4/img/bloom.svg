@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" width="760" height="300" role="img" aria-label="A bloom filter with three hash functions, showing a definite no and a maybe">
+  <rect width="760" height="300" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="380" y="30" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="700" fill="#0f172a">&quot;Definitely not&quot; is free. &quot;Maybe&quot; costs a lookup.</text>
+
+  <text x="40" y="66" font-family="ui-monospace,Menlo,monospace" font-size="11" fill="#166534">add(&quot;apple&quot;)  &#8594; bits 2, 7, 11</text>
+  <g>
+    <g fill="#fff" stroke="#cbd5e1">
+      <rect x="40" y="78" width="42" height="34" rx="4"/><rect x="88" y="78" width="42" height="34" rx="4"/>
+      <rect x="136" y="78" width="42" height="34" rx="4"/><rect x="184" y="78" width="42" height="34" rx="4"/>
+      <rect x="232" y="78" width="42" height="34" rx="4"/><rect x="280" y="78" width="42" height="34" rx="4"/>
+      <rect x="328" y="78" width="42" height="34" rx="4"/><rect x="376" y="78" width="42" height="34" rx="4"/>
+      <rect x="424" y="78" width="42" height="34" rx="4"/><rect x="472" y="78" width="42" height="34" rx="4"/>
+      <rect x="520" y="78" width="42" height="34" rx="4"/><rect x="568" y="78" width="42" height="34" rx="4"/>
+    </g>
+    <g fill="#dcfce7" stroke="#22c55e">
+      <rect x="136" y="78" width="42" height="34" rx="4"/><rect x="376" y="78" width="42" height="34" rx="4"/>
+      <rect x="568" y="78" width="42" height="34" rx="4"/>
+    </g>
+    <g font-family="ui-monospace,Menlo,monospace" font-size="11" fill="#64748b">
+      <text x="61" y="100" text-anchor="middle">0</text><text x="109" y="100" text-anchor="middle">0</text>
+      <text x="157" y="100" text-anchor="middle" fill="#166534" font-weight="700">1</text><text x="205" y="100" text-anchor="middle">0</text>
+      <text x="253" y="100" text-anchor="middle">0</text><text x="301" y="100" text-anchor="middle">0</text>
+      <text x="349" y="100" text-anchor="middle">0</text><text x="397" y="100" text-anchor="middle" fill="#166534" font-weight="700">1</text>
+      <text x="445" y="100" text-anchor="middle">0</text><text x="493" y="100" text-anchor="middle">0</text>
+      <text x="541" y="100" text-anchor="middle">0</text><text x="589" y="100" text-anchor="middle" fill="#166534" font-weight="700">1</text>
+    </g>
+  </g>
+
+  <g font-family="system-ui,sans-serif" font-size="12">
+    <rect x="40" y="136" width="330" height="72" rx="6" fill="#dcfce7" stroke="#86efac"/>
+    <text x="56" y="158" font-weight="700" fill="#166534">contains(&quot;plum&quot;) &#8594; bits 1, 5, 9</text>
+    <text x="56" y="180" fill="#334155">bit 1 is zero, so &quot;plum&quot; was never added.</text>
+    <text x="56" y="198" fill="#166534">Certain. No lookup needed. This is the win.</text>
+
+    <rect x="390" y="136" width="330" height="72" rx="6" fill="#fef3c7" stroke="#fcd34d"/>
+    <text x="406" y="158" font-weight="700" fill="#92400e">contains(&quot;grape&quot;) &#8594; bits 2, 7, 11</text>
+    <text x="406" y="180" fill="#334155">all three set &#8212; but by &quot;apple&quot;, not by &quot;grape&quot;.</text>
+    <text x="406" y="198" fill="#92400e">A false positive. Costs one wasted lookup.</text>
+  </g>
+
+  <rect x="40" y="226" width="680" height="52" rx="6" fill="#fff" stroke="#cbd5e1"/>
+  <text x="56" y="248" font-family="system-ui,sans-serif" font-size="11" fill="#334155">Never a false negative. If the filter says no, it is no &#8212; which is the only guarantee you need to skip a lookup safely.</text>
+  <text x="56" y="266" font-family="system-ui,sans-serif" font-size="11" fill="#64748b">10 bits per key gives about 1% false positives. A million keys in 1.2 MB.</text>
+</svg>

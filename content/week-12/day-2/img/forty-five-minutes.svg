@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 290" width="760" height="290" role="img" aria-label="Forty-five minutes divided between the seven passes, with the two that get squeezed marked">
+  <rect width="760" height="290" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="380" y="30" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="700" fill="#0f172a">Forty-five minutes, and the two passes that always get squeezed</text>
+
+  <g stroke="#94a3b8" stroke-width="1"><path d="M40 116 H720"/></g>
+  <g font-family="system-ui,sans-serif" font-size="10" fill="#64748b">
+    <text x="40" y="136">0</text><text x="176" y="136">9</text><text x="312" y="136">18</text>
+    <text x="448" y="136">27</text><text x="584" y="136">36</text><text x="716" y="136" text-anchor="end">45</text>
+  </g>
+
+  <g font-family="system-ui,sans-serif" font-size="10">
+    <rect x="40" y="76" width="100" height="34" rx="4" fill="#dbeafe" stroke="#93c5fd"/>
+    <text x="90" y="97" text-anchor="middle" fill="#1e3a8a">interrogate</text>
+    <rect x="142" y="76" width="76" height="34" rx="4" fill="#dbeafe" stroke="#93c5fd"/>
+    <text x="180" y="97" text-anchor="middle" fill="#1e3a8a">size</text>
+    <rect x="220" y="76" width="106" height="34" rx="4" fill="#dbeafe" stroke="#93c5fd"/>
+    <text x="273" y="97" text-anchor="middle" fill="#1e3a8a">contract</text>
+    <rect x="328" y="76" width="106" height="34" rx="4" fill="#dbeafe" stroke="#93c5fd"/>
+    <text x="381" y="97" text-anchor="middle" fill="#1e3a8a">path</text>
+    <rect x="436" y="76" width="150" height="34" rx="4" fill="#fef3c7" stroke="#fcd34d"/>
+    <text x="511" y="97" text-anchor="middle" fill="#92400e">decide</text>
+    <rect x="588" y="76" width="80" height="34" rx="4" fill="#fee2e2" stroke="#fca5a5"/>
+    <text x="628" y="97" text-anchor="middle" fill="#991b1b">break</text>
+    <rect x="670" y="76" width="50" height="34" rx="4" fill="#fee2e2" stroke="#fca5a5"/>
+    <text x="695" y="97" text-anchor="middle" fill="#991b1b">evolve</text>
+  </g>
+
+  <rect x="40" y="156" width="330" height="110" rx="6" fill="#fff" stroke="#fca5a5"/>
+  <text x="56" y="178" font-family="system-ui,sans-serif" font-size="12" font-weight="600" fill="#991b1b">What actually happens</text>
+  <text x="56" y="200" font-family="system-ui,sans-serif" font-size="11" fill="#334155">Twelve minutes of questions, twenty of</text>
+  <text x="56" y="218" font-family="system-ui,sans-serif" font-size="11" fill="#334155">drawing components, and the interview</text>
+  <text x="56" y="236" font-family="system-ui,sans-serif" font-size="11" fill="#334155">ends before failure modes are mentioned.</text>
+  <text x="56" y="258" font-family="system-ui,sans-serif" font-size="11" fill="#991b1b">Break and evolve are where the hiring</text>
+
+  <rect x="390" y="156" width="330" height="110" rx="6" fill="#fff" stroke="#86efac"/>
+  <text x="406" y="178" font-family="system-ui,sans-serif" font-size="12" font-weight="600" fill="#166534">What to do about it</text>
+  <text x="406" y="200" font-family="system-ui,sans-serif" font-size="11" fill="#334155">Announce the plan at minute one.</text>
+  <text x="406" y="218" font-family="system-ui,sans-serif" font-size="11" fill="#334155">Timebox pass 1 out loud. Say &quot;I&#8217;ll come</text>
+  <text x="406" y="236" font-family="system-ui,sans-serif" font-size="11" fill="#334155">back to that&quot; and mean it.</text>
+  <text x="406" y="258" font-family="system-ui,sans-serif" font-size="11" fill="#166534">Leave twelve minutes. Protect them.</text>
+  <text x="56" y="278" font-family="system-ui,sans-serif" font-size="11" fill="#991b1b">decision is made.</text>
+</svg>

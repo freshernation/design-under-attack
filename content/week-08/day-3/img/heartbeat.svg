@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" width="760" height="300" role="img" aria-label="A heartbeat timeout declaring a healthy client offline">
+  <rect width="760" height="300" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="380" y="30" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="700" fill="#0f172a">Presence is a guess with a timeout on it</text>
+
+  <g stroke="#cbd5e1" stroke-width="1"><path d="M60 120 H720"/></g>
+  <g font-family="system-ui,sans-serif" font-size="11" fill="#475569"><text x="30" y="124">client</text></g>
+
+  <g fill="#22c55e">
+    <circle cx="110" cy="120" r="6"/><circle cx="180" cy="120" r="6"/><circle cx="250" cy="120" r="6"/>
+  </g>
+  <g font-family="system-ui,sans-serif" font-size="10" fill="#166534">
+    <text x="110" y="106" text-anchor="middle">beat</text><text x="180" y="106" text-anchor="middle">beat</text><text x="250" y="106" text-anchor="middle">beat</text>
+  </g>
+
+  <rect x="256" y="106" width="200" height="28" rx="4" fill="#fef3c7" stroke="#fcd34d"/>
+  <text x="356" y="124" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#92400e">a tunnel, a lift, 30 seconds of nothing</text>
+
+  <g stroke="#b91c1c" stroke-width="1.6" stroke-dasharray="4 3"><path d="M456 76 V164"/></g>
+  <text x="462" y="72" font-family="system-ui,sans-serif" font-size="11" fill="#b91c1c" font-weight="600">timeout &#8212; declared offline</text>
+
+  <g fill="#22c55e">
+    <circle cx="520" cy="120" r="6"/><circle cx="590" cy="120" r="6"/><circle cx="660" cy="120" r="6"/>
+  </g>
+  <text x="590" y="106" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#166534">and it was never gone</text>
+
+  <rect x="60" y="186" width="320" height="88" rx="6" fill="#fff" stroke="#fca5a5"/>
+  <text x="76" y="208" font-family="system-ui,sans-serif" font-size="12" font-weight="600" fill="#991b1b">Timeout too short</text>
+  <text x="76" y="228" font-family="system-ui,sans-serif" font-size="11" fill="#334155">Healthy users flicker offline and back.</text>
+  <text x="76" y="246" font-family="system-ui,sans-serif" font-size="11" fill="#334155">Every flicker is a presence broadcast to</text>
+  <text x="76" y="264" font-family="system-ui,sans-serif" font-size="11" fill="#334155">everyone who can see them.</text>
+
+  <rect x="400" y="186" width="320" height="88" rx="6" fill="#fff" stroke="#fcd34d"/>
+  <text x="416" y="208" font-family="system-ui,sans-serif" font-size="12" font-weight="600" fill="#92400e">Timeout too long</text>
+  <text x="416" y="228" font-family="system-ui,sans-serif" font-size="11" fill="#334155">People who left are shown as present,</text>
+  <text x="416" y="246" font-family="system-ui,sans-serif" font-size="11" fill="#334155">so messages are &quot;delivered&quot; to nobody</text>
+  <text x="416" y="264" font-family="system-ui,sans-serif" font-size="11" fill="#334155">and the green dot stops meaning anything.</text>
+</svg>

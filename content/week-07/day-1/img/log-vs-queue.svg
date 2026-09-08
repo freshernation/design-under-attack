@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 320" width="760" height="320" role="img" aria-label="A queue that deletes on acknowledgement versus a log where consumers hold offsets">
+  <rect width="760" height="320" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="380" y="30" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="700" fill="#0f172a">Who remembers how far you got</text>
+
+  <text x="30" y="62" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#92400e">Queue &#8212; the broker remembers</text>
+  <g font-family="ui-monospace,Menlo,monospace" font-size="10">
+    <rect x="30" y="76" width="46" height="30" rx="4" fill="#f1f5f9" stroke="#e2e8f0"/><text x="53" y="96" text-anchor="middle" fill="#cbd5e1">gone</text>
+    <rect x="82" y="76" width="46" height="30" rx="4" fill="#f1f5f9" stroke="#e2e8f0"/><text x="105" y="96" text-anchor="middle" fill="#cbd5e1">gone</text>
+    <rect x="134" y="76" width="46" height="30" rx="4" fill="#fef3c7" stroke="#d97706"/><text x="157" y="96" text-anchor="middle" fill="#92400e">m3</text>
+    <rect x="186" y="76" width="46" height="30" rx="4" fill="#fff" stroke="#cbd5e1"/><text x="209" y="96" text-anchor="middle" fill="#334155">m4</text>
+    <rect x="238" y="76" width="46" height="30" rx="4" fill="#fff" stroke="#cbd5e1"/><text x="261" y="96" text-anchor="middle" fill="#334155">m5</text>
+  </g>
+  <text x="30" y="130" font-family="system-ui,sans-serif" font-size="11" fill="#334155">An acknowledged message is deleted.</text>
+  <text x="30" y="148" font-family="system-ui,sans-serif" font-size="11" fill="#334155">One consumer per message.</text>
+  <text x="30" y="172" font-family="system-ui,sans-serif" font-size="11" fill="#b91c1c">A bug that processed m1 wrongly is</text>
+  <text x="30" y="190" font-family="system-ui,sans-serif" font-size="11" fill="#b91c1c">unrecoverable &#8212; m1 no longer exists.</text>
+  <text x="30" y="216" font-family="system-ui,sans-serif" font-size="11" fill="#166534">Cheap: the broker holds only what is</text>
+  <text x="30" y="234" font-family="system-ui,sans-serif" font-size="11" fill="#166534">outstanding.</text>
+
+  <line x1="360" y1="46" x2="360" y2="300" stroke="#cbd5e1" stroke-dasharray="4 4"/>
+
+  <text x="390" y="62" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#166534">Log &#8212; the consumer remembers</text>
+  <g font-family="ui-monospace,Menlo,monospace" font-size="10">
+    <rect x="390" y="76" width="46" height="30" rx="4" fill="#fff" stroke="#cbd5e1"/><text x="413" y="96" text-anchor="middle" fill="#334155">m1</text>
+    <rect x="442" y="76" width="46" height="30" rx="4" fill="#fff" stroke="#cbd5e1"/><text x="465" y="96" text-anchor="middle" fill="#334155">m2</text>
+    <rect x="494" y="76" width="46" height="30" rx="4" fill="#fff" stroke="#cbd5e1"/><text x="517" y="96" text-anchor="middle" fill="#334155">m3</text>
+    <rect x="546" y="76" width="46" height="30" rx="4" fill="#fff" stroke="#cbd5e1"/><text x="569" y="96" text-anchor="middle" fill="#334155">m4</text>
+    <rect x="598" y="76" width="46" height="30" rx="4" fill="#fff" stroke="#cbd5e1"/><text x="621" y="96" text-anchor="middle" fill="#334155">m5</text>
+  </g>
+  <g stroke="#2563eb" stroke-width="2" fill="none" marker-end="url(#w7a)"><path d="M517 122 V110"/></g>
+  <g stroke="#16a34a" stroke-width="2" fill="none" marker-end="url(#w7b)"><path d="M621 122 V110"/></g>
+  <defs>
+    <marker id="w7a" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="#2563eb"/></marker>
+    <marker id="w7b" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="#16a34a"/></marker>
+  </defs>
+  <text x="517" y="138" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#2563eb">billing @2</text>
+  <text x="621" y="138" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#16a34a">analytics @4</text>
+
+  <text x="390" y="172" font-family="system-ui,sans-serif" font-size="11" fill="#334155">Nothing is deleted on read. Many</text>
+  <text x="390" y="190" font-family="system-ui,sans-serif" font-size="11" fill="#334155">consumers, each at its own offset.</text>
+  <text x="390" y="216" font-family="system-ui,sans-serif" font-size="11" fill="#166534">A bug is recoverable: set the offset</text>
+  <text x="390" y="234" font-family="system-ui,sans-serif" font-size="11" fill="#166534">back and process it again.</text>
+  <text x="390" y="258" font-family="system-ui,sans-serif" font-size="11" fill="#b91c1c">Costly: you store everything for the</text>
+  <text x="390" y="276" font-family="system-ui,sans-serif" font-size="11" fill="#b91c1c">whole retention window.</text>
+</svg>

@@ -1,0 +1,280 @@
+# Week 10's reading, recorded properly.
+
+system: Week 10 reading — geospatial, convergent types, matching engines, serving
+
+sources:
+  - id: h3-docs
+    title: "H3: Hexagonal hierarchical geospatial indexing system"
+    url: https://h3geo.org/docs/
+    publisher: Uber
+    kind: official_docs
+    runs_the_system: true
+    tier: 1
+    undated: true
+    retrieved: 2026-09-02
+    note: Resolutions, neighbours, and the argument for hexagons over squares
+
+  - id: s2-geometry
+    title: S2 Geometry
+    url: https://s2geometry.io/
+    publisher: Google
+    kind: official_docs
+    runs_the_system: true
+    tier: 1
+    undated: true
+    retrieved: 2026-09-02
+    note: The space-filling-curve answer to the same problem
+
+  - id: uber-deepeta
+    title: "DeepETA: How Uber Predicts Arrival Times Using Deep Learning"
+    url: https://www.uber.com/blog/deepeta-how-uber-predicts-arrival-times/
+    publisher: Uber
+    runs_the_system: true
+    tier: 1
+    undated: true
+    retrieved: 2026-09-02
+    manual: true
+    note: Uber's site refuses automated fetching; verified by hand
+
+  - id: deepreta-paper
+    title: "DeeprETA: An ETA Post-processing System at Scale"
+    url: https://arxiv.org/pdf/2206.02127
+    publisher: arXiv
+    author: Uber AI
+    kind: paper
+    runs_the_system: true
+    tier: 1
+    published: 2022
+    retrieved: 2026-09-02
+
+  - id: wave-ot
+    title: Operational Transformation in Google Wave
+    url: https://svn.apache.org/repos/asf/incubator/wave/whitepapers/operational-transform/operational-transform.html
+    publisher: Apache Wave
+    tier: 2
+    undated: true
+    retrieved: 2026-09-02
+    note: The clearest free write-up of OT
+
+  - id: shapiro-crdts
+    title: A comprehensive study of Convergent and Commutative Replicated Data Types
+    url: https://inria.hal.science/inria-00555588
+    publisher: INRIA
+    author: Shapiro, Preguiça, Baquero, Zawirski
+    kind: paper
+    tier: 2
+    published: 2011
+    retrieved: 2026-09-02
+
+  - id: automerge-docs
+    title: Automerge documentation
+    url: https://automerge.org/docs/
+    publisher: Automerge
+    kind: official_docs
+    runs_the_system: true
+    tier: 1
+    undated: true
+    retrieved: 2026-09-02
+    note: A current implementation, including its own overhead figures
+
+  - id: yjs-docs
+    title: Yjs documentation
+    url: https://docs.yjs.dev/
+    publisher: Yjs
+    kind: official_docs
+    runs_the_system: true
+    tier: 1
+    undated: true
+    retrieved: 2026-09-02
+
+  - id: crdt-tech
+    title: crdt.tech
+    url: https://crdt.tech/
+    publisher: crdt.tech
+    tier: 3
+    undated: true
+    retrieved: 2026-09-02
+    note: A maintained index of the literature and implementations
+
+  - id: lmax-disruptor
+    title: The LMAX Disruptor
+    url: https://lmax-exchange.github.io/disruptor/disruptor.html
+    publisher: LMAX Exchange
+    kind: official_docs
+    runs_the_system: true
+    tier: 1
+    undated: true
+    retrieved: 2026-09-02
+    note: >-
+      An exchange documenting its own design. The material dates from around 2011 and the
+      systems have certainly moved on; the constraints have not.
+
+  - id: nasdaq-itch
+    title: Nasdaq TotalView-ITCH specification
+    url: https://www.nasdaqtrader.com/content/technicalsupport/specifications/dataproducts/NQTVITCHspecification.pdf
+    publisher: Nasdaq
+    kind: spec
+    runs_the_system: true
+    tier: 1
+    undated: true
+    retrieved: 2026-09-02
+    note: A real wire protocol. The message list is the domain model
+
+  - id: vllm-paper
+    title: Efficient Memory Management for Large Language Model Serving with PagedAttention
+    url: https://arxiv.org/abs/2309.06180
+    publisher: arXiv
+    author: Kwon et al.
+    kind: paper
+    tier: 2
+    published: 2023
+    retrieved: 2026-09-02
+
+  - id: triton-docs
+    title: NVIDIA Triton Inference Server
+    url: https://docs.nvidia.com/deeplearning/triton-inference-server/user-guide/docs/index.html
+    publisher: NVIDIA
+    kind: official_docs
+    runs_the_system: true
+    tier: 1
+    undated: true
+    retrieved: 2026-09-02
+
+  - id: netflix-open-connect
+    title: Netflix Open Connect
+    url: https://openconnect.netflix.com/
+    publisher: Netflix
+    runs_the_system: true
+    tier: 1
+    undated: true
+    retrieved: 2026-09-02
+
+  - id: atproto-overview
+    title: "AT Protocol — overview"
+    url: https://atproto.com/guides/overview
+    publisher: Bluesky
+    kind: spec
+    runs_the_system: true
+    tier: 1
+    undated: true
+    retrieved: 2026-09-02
+
+  - id: bsky-federation
+    title: "Bluesky — federation architecture"
+    url: https://docs.bsky.app/docs/advanced-guides/federation-architecture
+    publisher: Bluesky
+    kind: official_docs
+    runs_the_system: true
+    tier: 1
+    undated: true
+    retrieved: 2026-09-02
+
+claims:
+  - id: hexagons-uniform-neighbours
+    text: >-
+      Every neighbour of a hexagonal cell is the same distance away, which squares cannot
+      offer, at the cost of hexagons not nesting exactly across resolutions.
+    kind: known
+    sources: [h3-docs]
+
+  - id: eta-is-post-processing
+    text: >-
+      Uber's ETA is a routing engine's estimate corrected by a machine-learning model,
+      rather than a model predicting arrival time directly.
+    kind: known
+    sources: [uber-deepeta, deepreta-paper]
+
+  - id: ot-needs-ordering
+    text: >-
+      Operational transformation rewrites an operation against the operations it did not
+      know about, and practical implementations use a central server to establish the
+      order against which to transform.
+    kind: known
+    sources: [wave-ot]
+
+  - id: crdts-converge-without-ordering
+    text: >-
+      A convergent replicated data type merges commutatively, associatively and
+      idempotently, so replicas converge regardless of the order updates arrive in.
+    kind: known
+    sources: [shapiro-crdts, automerge-docs, yjs-docs]
+
+  - id: single-thread-beats-locks
+    text: >-
+      Removing concurrency from the matching core made it faster: lock acquisition and
+      cross-core cache contention cost more than the matching itself.
+    kind: known
+    sources: [lmax-disruptor]
+
+  - id: paged-attention
+    text: >-
+      Serving state per request grows with generated tokens, and allocating it in pages
+      rather than reserving the maximum substantially increases the number of concurrent
+      requests a given amount of memory supports.
+    kind: known
+    sources: [vllm-paper]
+
+  - id: continuous-batching
+    text: >-
+      Refilling a finished batch slot immediately from the queue keeps the accelerator busy
+      and raises throughput substantially over running a batch to completion together.
+    kind: known
+    sources: [vllm-paper, triton-docs]
+
+  - id: federated-roles
+    text: >-
+      The AT Protocol separates personal data servers, which hold user data, from relays,
+      which aggregate their streams, from app views, which build products over the
+      aggregate.
+    kind: known
+    sources: [atproto-overview, bsky-federation]
+
+  - id: convergence-is-not-correctness
+    text: >-
+      Convergent types guarantee that all replicas reach the same state, not that the state
+      reflects either author's intention.
+    kind: inferred
+    sources: [shapiro-crdts]
+    note: >-
+      Implied throughout the literature and rarely stated as plainly. Demonstrated as a
+      test in the day-2 lab rather than asserted.
+
+  - id: expensive-resource-framing
+    text: >-
+      A specialised architecture is usually organised around avoiding one expensive
+      resource, and identifying that resource explains most of the design.
+    kind: inferred
+    sources: [lmax-disruptor, netflix-open-connect, vllm-paper]
+    note: Our framing across the four domains. Tier 3
+
+  - id: break-even-for-specialisation
+    text: >-
+      A specialised mechanism has a fixed cost and pays for itself only above a volume that
+      can be computed.
+    kind: derived
+    note: Arithmetic, worked in the week-10 milestone lab
+
+  - id: google-docs-implementation
+    text: >-
+      What Google Docs actually does today.
+    kind: unknown
+    note: >-
+      The cited ancestor is the Jupiter paper (Nichols et al., 1995), which is not freely
+      available, and Google has published almost nothing about the current implementation.
+      Anything describing it in detail is inference.
+
+  - id: modern-matching-engines
+    text: >-
+      What a modern exchange's matching engine looks like.
+    kind: unknown
+    note: >-
+      The Disruptor material is from around 2011 and the domain is secretive. The
+      constraints — determinism, sequencing, replay — are the durable part.
+
+  - id: llm-serving-stacks
+    text: >-
+      How large providers actually serve their own models.
+    kind: unknown
+    note: >-
+      OpenAI publishes infrastructure posts rather than architecture. A good final example
+      of the week-1 lesson.

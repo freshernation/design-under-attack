@@ -1,0 +1,229 @@
+# Week 9's reading, recorded properly.
+
+system: Week 9 reading — SLOs, retries, isolation, shedding
+
+sources:
+  - id: sre-slos
+    title: "Site Reliability Engineering — Service Level Objectives"
+    url: https://sre.google/sre-book/service-level-objectives/
+    publisher: Google
+    kind: official_docs
+    runs_the_system: true
+    tier: 1
+    published: 2016
+    retrieved: 2026-09-02
+
+  - id: sre-embracing-risk
+    title: "Site Reliability Engineering — Embracing Risk"
+    url: https://sre.google/sre-book/embracing-risk/
+    publisher: Google
+    kind: official_docs
+    runs_the_system: true
+    tier: 1
+    published: 2016
+    retrieved: 2026-09-02
+    note: Error budgets as a resource to spend, and the argument against 100%
+
+  - id: sre-alerting-on-slos
+    title: "SRE Workbook — Alerting on SLOs"
+    url: https://sre.google/workbook/alerting-on-slos/
+    publisher: Google
+    kind: official_docs
+    runs_the_system: true
+    tier: 1
+    published: 2018
+    retrieved: 2026-09-02
+    note: Burn-rate alerting with multiple windows, worked through properly
+
+  - id: sre-cascading-failures
+    title: "Site Reliability Engineering — Addressing Cascading Failures"
+    url: https://sre.google/sre-book/addressing-cascading-failures/
+    publisher: Google
+    kind: official_docs
+    runs_the_system: true
+    tier: 1
+    published: 2016
+    retrieved: 2026-09-02
+
+  - id: sre-handling-overload
+    title: "Site Reliability Engineering — Handling Overload"
+    url: https://sre.google/sre-book/handling-overload/
+    publisher: Google
+    kind: official_docs
+    runs_the_system: true
+    tier: 1
+    published: 2016
+    retrieved: 2026-09-02
+    note: Criticality levels and per-client quotas
+
+  - id: aws-retries
+    title: Timeouts, retries and backoff with jitter
+    url: https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/
+    publisher: Amazon Web Services
+    runs_the_system: true
+    tier: 1
+    undated: true
+    retrieved: 2026-09-02
+    note: The definitive practitioner account, including retry budgets
+
+  - id: aws-jitter-post
+    title: Exponential Backoff And Jitter
+    url: https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/
+    publisher: Amazon Web Services
+    runs_the_system: true
+    tier: 1
+    undated: true
+    retrieved: 2026-09-02
+    note: The simulation comparing full and decorrelated jitter, with numbers
+
+  - id: aws-shuffle-sharding
+    title: Workload isolation using shuffle-sharding
+    url: https://aws.amazon.com/builders-library/workload-isolation-using-shuffle-sharding/
+    publisher: Amazon Web Services
+    runs_the_system: true
+    tier: 1
+    undated: true
+    retrieved: 2026-09-02
+    note: The best idea in the week, with the combinatorics worked through
+
+  - id: aws-load-shedding
+    title: Using load shedding to avoid overload
+    url: https://aws.amazon.com/builders-library/using-load-shedding-to-avoid-overload/
+    publisher: Amazon Web Services
+    runs_the_system: true
+    tier: 1
+    undated: true
+    retrieved: 2026-09-02
+
+  - id: aws-health-checks
+    title: Implementing health checks
+    url: https://aws.amazon.com/builders-library/implementing-health-checks/
+    publisher: Amazon Web Services
+    runs_the_system: true
+    tier: 1
+    undated: true
+    retrieved: 2026-09-02
+    note: Liveness, shallow and deep checks, and why a deep check can empty a fleet
+
+  - id: hystrix-how-it-works
+    title: "Hystrix — How it Works"
+    url: https://github.com/Netflix/Hystrix/wiki/How-it-Works
+    publisher: Netflix
+    kind: official_docs
+    runs_the_system: true
+    tier: 1
+    undated: true
+    retrieved: 2026-09-02
+    note: >-
+      Archived. The origin of most engineers' mental model of a circuit breaker, and read
+      as history rather than as current advice.
+
+  - id: resilience4j-breaker
+    title: "resilience4j — CircuitBreaker"
+    url: https://resilience4j.readme.io/docs/circuitbreaker
+    publisher: resilience4j
+    kind: official_docs
+    tier: 2
+    undated: true
+    retrieved: 2026-09-02
+    note: A current implementation's states, thresholds and half-open behaviour
+
+claims:
+  - id: error-budgets-are-for-spending
+    text: >-
+      An availability target implies a permitted quantity of failure, which is a resource
+      to be spent deliberately rather than a margin to be preserved.
+    kind: known
+    sources: [sre-embracing-risk, sre-slos]
+
+  - id: burn-rate-alerting
+    text: >-
+      Alerting on the rate at which an error budget is consumed, over several windows at
+      once, catches both severe outages quickly and slow leaks eventually.
+    kind: known
+    sources: [sre-alerting-on-slos]
+
+  - id: retries-add-load
+    text: >-
+      Client retries add load to a service precisely when it is least able to absorb it,
+      forming a feedback loop that turns degradation into failure.
+    kind: known
+    sources: [sre-cascading-failures, aws-retries]
+
+  - id: jitter-not-just-backoff
+    text: >-
+      Exponential backoff without jitter causes clients to retry in synchronised waves;
+      randomising the delay spreads the load across the backoff window.
+    kind: known
+    sources: [aws-jitter-post, aws-retries]
+
+  - id: retry-budgets
+    text: >-
+      Capping retries as a fraction of total requests bounds the load amplification during
+      an outage while leaving retries available under normal conditions.
+    kind: known
+    sources: [aws-retries]
+
+  - id: shuffle-sharding
+    text: >-
+      Assigning each customer a random subset of servers rather than one server makes it
+      unlikely that two customers share their entire subset, so one customer's bad traffic
+      degrades few others.
+    kind: known
+    sources: [aws-shuffle-sharding]
+
+  - id: shedding-protects-goodput
+    text: >-
+      Rejecting excess work quickly preserves the ability to complete accepted work, while
+      an unprotected service past capacity completes work whose clients have already timed
+      out.
+    kind: known
+    sources: [aws-load-shedding, sre-handling-overload]
+
+  - id: deep-health-checks-can-empty-a-fleet
+    text: >-
+      A health check that verifies a shared dependency will mark every host unhealthy at
+      once when that dependency fails, removing the entire fleet from service.
+    kind: known
+    sources: [aws-health-checks]
+
+  - id: half-open-prevents-a-stampede
+    text: >-
+      Allowing a single probe after the cool-off, rather than closing outright, prevents
+      every waiting client resuming simultaneously against a recovering dependency.
+    kind: known
+    sources: [resilience4j-breaker, hystrix-how-it-works]
+
+  - id: dependency-ceiling
+    text: >-
+      A service's achievable availability is bounded by the product of its critical-path
+      dependencies' availabilities, regardless of its own quality.
+    kind: derived
+    note: >-
+      Arithmetic. Widely known and rarely computed; the day-1 lab makes students produce
+      the number for their own designs.
+
+  - id: protection-ordering
+    text: >-
+      The order in which resilience mechanisms improve goodput is not the order in which
+      teams typically add them.
+    kind: derived
+    note: >-
+      Produced by the week-9 milestone's stipulated incident model, which composes the
+      week's three days. A comparison between designs, not a prediction about any system.
+
+  - id: real-breaker-thresholds
+    text: >-
+      What failure thresholds and cool-off periods production services actually use.
+    kind: unknown
+    note: >-
+      Entirely dependent on the dependency's normal error rate and traffic volume. Any
+      figure quoted without those is folklore.
+
+  - id: overload-goodput-curves
+    text: >-
+      The actual shape of the goodput curve past capacity for a given service.
+    kind: unknown
+    note: >-
+      Depends on queue discipline, timeout distribution and client behaviour. Our model is
+      stipulated and the tests assert only its direction.

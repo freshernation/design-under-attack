@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" width="760" height="300" role="img" aria-label="An even distribution across eight partitions versus a skewed one">
+  <rect width="760" height="300" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="380" y="30" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="700" fill="#0f172a">Eight partitions, same total load, two different systems</text>
+
+  <text x="30" y="60" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#166534">Keyed by request id — skew 1.1</text>
+  <g fill="#86efac" stroke="#22c55e">
+    <rect x="30" y="72" width="34" height="60" y2="0"/><rect x="72" y="76" width="34" height="56"/>
+    <rect x="114" y="70" width="34" height="62"/><rect x="156" y="78" width="34" height="54"/>
+    <rect x="198" y="74" width="34" height="58"/><rect x="240" y="72" width="34" height="60"/>
+    <rect x="282" y="80" width="34" height="52"/><rect x="324" y="75" width="34" height="57"/>
+  </g>
+  <line x1="24" y1="132" x2="366" y2="132" stroke="#94a3b8"/>
+  <text x="30" y="152" font-family="system-ui,sans-serif" font-size="11" fill="#334155">Every partition at about 12.5% of the load.</text>
+  <text x="30" y="168" font-family="system-ui,sans-serif" font-size="11" fill="#334155">Add a machine and everyone gets lighter.</text>
+
+  <line x1="392" y1="46" x2="392" y2="284" stroke="#cbd5e1" stroke-dasharray="4 4"/>
+
+  <text x="418" y="60" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#b91c1c">Keyed by tenant — skew 5.8</text>
+  <g fill="#fca5a5" stroke="#ef4444">
+    <rect x="418" y="72" width="34" height="60"/><rect x="460" y="120" width="34" height="12"/>
+    <rect x="502" y="124" width="34" height="8"/><rect x="544" y="118" width="34" height="14"/>
+    <rect x="586" y="126" width="34" height="6"/><rect x="628" y="122" width="34" height="10"/>
+    <rect x="670" y="125" width="34" height="7"/><rect x="712" y="127" width="20" height="5"/>
+  </g>
+  <line x1="412" y1="132" x2="740" y2="132" stroke="#94a3b8"/>
+  <text x="418" y="152" font-family="system-ui,sans-serif" font-size="11" fill="#b91c1c">One tenant is 70% of the traffic.</text>
+  <text x="418" y="168" font-family="system-ui,sans-serif" font-size="11" fill="#b91c1c">Add a machine and nothing improves.</text>
+
+  <rect x="30" y="192" width="702" height="86" rx="6" fill="#fffbeb" stroke="#fcd34d"/>
+  <text x="48" y="214" font-family="system-ui,sans-serif" font-size="12" font-weight="600" fill="#92400e">Skew = the busiest partition&#8217;s load, divided by the average</text>
+  <text x="48" y="236" font-family="system-ui,sans-serif" font-size="11" fill="#334155">At skew 5.8, the fleet is at 15% utilisation and one machine is at 87%. Every capacity number you computed</text>
+  <text x="48" y="252" font-family="system-ui,sans-serif" font-size="11" fill="#334155">describes the average machine, and no user is served by the average machine.</text>
+  <text x="48" y="270" font-family="system-ui,sans-serif" font-size="11" fill="#64748b">Compute it in pass 2, on the key you were going to choose anyway.</text>
+</svg>

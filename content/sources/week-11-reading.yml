@@ -1,0 +1,71 @@
+# Week 11's reading, recorded properly — and it is unusually short, which is the point.
+
+system: Week 11 reading — designing from a one-line brief, and writing it down
+
+sources:
+  - id: aws-builders-library
+    title: The Amazon Builders' Library
+    url: https://aws.amazon.com/builders-library/
+    publisher: Amazon Web Services
+    runs_the_system: true
+    tier: 1
+    undated: true
+    retrieved: 2026-09-02
+    note: >-
+      Cited here for a shape rather than a claim: the articles repeatedly work backwards
+      from an outcome to a design, which is the practice week 11 teaches. No article states
+      it as a method.
+
+  - id: sre-book
+    title: Site Reliability Engineering
+    url: https://sre.google/sre-book/
+    publisher: Google
+    kind: official_docs
+    runs_the_system: true
+    tier: 1
+    published: 2016
+    retrieved: 2026-09-02
+    note: Cited here as one of the two places the individual passes came from
+
+claims:
+  - id: no-authority-on-design-documents
+    text: >-
+      There is no authoritative source for how to structure a system design document or
+      how to elicit requirements from a one-line brief.
+    kind: unknown
+    note: >-
+      Stated deliberately. Week 11's articles are the most opinionated in the course and
+      the least sourced, and saying so is the honest application of the doctrine to
+      ourselves. Anyone offering a definitive template for this is selling something.
+
+  - id: working-backwards
+    text: >-
+      Starting from the intended outcome and designing towards it, rather than starting
+      from available components, is visible throughout Amazon's published engineering
+      practice.
+    kind: inferred
+    sources: [aws-builders-library]
+    note: >-
+      Our reading of a pattern across many articles, none of which names it. Tier 3 in
+      substance.
+
+  - id: seven-passes
+    text: >-
+      The seven-pass structure used throughout this course.
+    kind: inferred
+    sources: [aws-builders-library, sre-book]
+    note: >-
+      Ours, stated as such since week 1, and the checker was right to insist we name what
+      it is inferred from. Sizing before architecture, the dead/slow/lying taxonomy and
+      the failure-mode framing all come from operational practice documented in these two
+      sources. The **sequence** is a teaching device with no authority behind it beyond
+      working, and that part remains ours.
+
+  - id: decision-record-format
+    text: >-
+      The four-part decision record — choice, rejected alternative, price, flipping
+      condition.
+    kind: derived
+    note: >-
+      Resembles the architecture-decision-record convention, which is community practice
+      with no single authoritative source. The fourth part is our addition.

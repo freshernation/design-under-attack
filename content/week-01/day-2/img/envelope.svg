@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 260" width="760" height="260" role="img" aria-label="The six dials of a non-functional envelope">
+  <rect width="760" height="260" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="380" y="30" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="700" fill="#0f172a">The envelope — six dials, each a number, each with a price</text>
+  <g font-family="system-ui,sans-serif" font-size="12">
+    <g>
+      <rect x="28" y="52" width="228" height="58" rx="6" fill="#fff" stroke="#cbd5e1"/>
+      <text x="42" y="74" font-weight="600" fill="#0f172a">Availability</text>
+      <text x="42" y="94" fill="#475569">99.9% — 43 min/month down</text>
+    </g>
+    <g>
+      <rect x="266" y="52" width="228" height="58" rx="6" fill="#fff" stroke="#cbd5e1"/>
+      <text x="280" y="74" font-weight="600" fill="#0f172a">Latency</text>
+      <text x="280" y="94" fill="#475569">p99 &lt; 200 ms, p50 &lt; 40 ms</text>
+    </g>
+    <g>
+      <rect x="504" y="52" width="228" height="58" rx="6" fill="#fff" stroke="#cbd5e1"/>
+      <text x="518" y="74" font-weight="600" fill="#0f172a">Durability</text>
+      <text x="518" y="94" fill="#475569">zero accepted writes lost</text>
+    </g>
+    <g>
+      <rect x="28" y="122" width="228" height="58" rx="6" fill="#fff" stroke="#cbd5e1"/>
+      <text x="42" y="144" font-weight="600" fill="#0f172a">Consistency</text>
+      <text x="42" y="164" fill="#475569">read-your-writes for the author</text>
+    </g>
+    <g>
+      <rect x="266" y="122" width="228" height="58" rx="6" fill="#fff" stroke="#cbd5e1"/>
+      <text x="280" y="144" font-weight="600" fill="#0f172a">Freshness</text>
+      <text x="280" y="164" fill="#475569">others may be 60 s stale</text>
+    </g>
+    <g>
+      <rect x="504" y="122" width="228" height="58" rx="6" fill="#fff" stroke="#cbd5e1"/>
+      <text x="518" y="144" font-weight="600" fill="#0f172a">Retention</text>
+      <text x="518" y="164" fill="#475569">90 days hot, 7 years cold</text>
+    </g>
+  </g>
+  <rect x="28" y="196" width="704" height="44" rx="6" fill="#fffbeb" stroke="#fcd34d"/>
+  <text x="42" y="222" font-family="system-ui,sans-serif" font-size="12" fill="#92400e">Every dial you turn up costs money, complexity, or one of the other five. An envelope where all six are &quot;high&quot; is a wish.</text>
+</svg>

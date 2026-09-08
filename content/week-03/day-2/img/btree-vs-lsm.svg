@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 330" width="760" height="330" role="img" aria-label="A B-tree updating in place versus an LSM tree appending and compacting">
+  <rect width="760" height="330" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="380" y="30" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="700" fill="#0f172a">One write, two philosophies</text>
+
+  <text x="30" y="60" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#1e3a8a">B-tree — find the place, change it</text>
+  <g font-family="system-ui,sans-serif" font-size="11">
+    <rect x="120" y="72" width="86" height="26" rx="4" fill="#dbeafe" stroke="#93c5fd"/><text x="163" y="90" text-anchor="middle" fill="#1e3a8a">root</text>
+    <rect x="52" y="118" width="86" height="26" rx="4" fill="#dbeafe" stroke="#93c5fd"/><text x="95" y="136" text-anchor="middle" fill="#1e3a8a">branch</text>
+    <rect x="188" y="118" width="86" height="26" rx="4" fill="#dbeafe" stroke="#93c5fd"/><text x="231" y="136" text-anchor="middle" fill="#1e3a8a">branch</text>
+    <rect x="30" y="164" width="66" height="26" rx="4" fill="#fff" stroke="#cbd5e1"/><text x="63" y="182" text-anchor="middle" fill="#475569">leaf</text>
+    <rect x="104" y="164" width="66" height="26" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="2"/><text x="137" y="182" text-anchor="middle" fill="#92400e">leaf</text>
+    <rect x="178" y="164" width="66" height="26" rx="4" fill="#fff" stroke="#cbd5e1"/><text x="211" y="182" text-anchor="middle" fill="#475569">leaf</text>
+    <rect x="252" y="164" width="66" height="26" rx="4" fill="#fff" stroke="#cbd5e1"/><text x="285" y="182" text-anchor="middle" fill="#475569">leaf</text>
+  </g>
+  <g stroke="#94a3b8" stroke-width="1.2" fill="none">
+    <path d="M150 98 L110 118"/><path d="M176 98 L216 118"/>
+    <path d="M80 144 L70 164"/><path d="M110 144 L130 164"/><path d="M216 144 L206 164"/><path d="M246 144 L278 164"/>
+  </g>
+  <g font-family="system-ui,sans-serif" font-size="11" fill="#334155">
+    <text x="30" y="218">One page rewritten, wherever it lives.</text>
+    <text x="30" y="236" fill="#b91c1c">A random write, and a whole 8 KB page</text>
+    <text x="30" y="254" fill="#b91c1c">for a 100-byte row.</text>
+    <text x="30" y="280" fill="#15803d">Reads: a handful of page reads, always.</text>
+    <text x="30" y="298" fill="#15803d">Predictable, and the same tomorrow.</text>
+  </g>
+
+  <line x1="390" y1="46" x2="390" y2="310" stroke="#cbd5e1" stroke-dasharray="4 4"/>
+
+  <text x="418" y="60" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#166534">LSM — write it down, sort it out later</text>
+  <g font-family="system-ui,sans-serif" font-size="11">
+    <rect x="418" y="72" width="150" height="26" rx="4" fill="#dcfce7" stroke="#86efac"/><text x="493" y="90" text-anchor="middle" fill="#166534">memtable (RAM)</text>
+    <rect x="418" y="112" width="150" height="22" rx="4" fill="#fff" stroke="#cbd5e1"/><text x="493" y="128" text-anchor="middle" fill="#475569">sstable — newest</text>
+    <rect x="418" y="140" width="150" height="22" rx="4" fill="#fff" stroke="#cbd5e1"/><text x="493" y="156" text-anchor="middle" fill="#475569">sstable</text>
+    <rect x="418" y="168" width="150" height="22" rx="4" fill="#fff" stroke="#cbd5e1"/><text x="493" y="184" text-anchor="middle" fill="#475569">sstable — oldest</text>
+    <text x="584" y="90" fill="#166534">append only</text>
+    <text x="584" y="130" fill="#64748b">immutable,</text>
+    <text x="584" y="148" fill="#64748b">sorted,</text>
+    <text x="584" y="166" fill="#64748b">merged in the</text>
+    <text x="584" y="184" fill="#64748b">background</text>
+  </g>
+  <g stroke="#86efac" stroke-width="1.6" fill="none"><path d="M493 98 V112"/></g>
+  <g font-family="system-ui,sans-serif" font-size="11" fill="#334155">
+    <text x="418" y="218">Writes are sequential. That is the whole trade.</text>
+    <text x="418" y="240" fill="#b91c1c">Reads may check every file.</text>
+    <text x="418" y="262" fill="#b91c1c">Compaction rewrites data you already wrote,</text>
+    <text x="418" y="280" fill="#b91c1c">in bursts, at times you do not choose &#8212;</text>
+    <text x="418" y="298" fill="#b91c1c">which is a service-time spike. See week 2.</text>
+  </g>
+</svg>

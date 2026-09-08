@@ -1,0 +1,150 @@
+# Week 1's own reading, recorded properly.
+#
+# This file is the worked example for the format. Copy its shape when you build
+# content/sources/slack-realtime.yml on day 4.
+#
+# Note what it does *not* do: invent a publication date it could not find. Two of
+# these sources are undated and say so, which is information rather than a gap.
+
+system: Week 1 reading — design method, envelopes, estimation, sources
+
+sources:
+  - id: sre-book-slo
+    title: "Site Reliability Engineering — Service Level Objectives"
+    url: https://sre.google/sre-book/service-level-objectives/
+    publisher: Google
+    kind: official_docs
+    runs_the_system: true
+    tier: 1
+    published: 2016
+    retrieved: 2026-09-02
+    note: SLI/SLO/SLA vocabulary, error budgets, the argument against a 100% target
+
+  - id: sre-workbook-slo
+    title: "The Site Reliability Workbook — Implementing SLOs"
+    url: https://sre.google/workbook/implementing-slos/
+    publisher: Google
+    kind: official_docs
+    runs_the_system: true
+    tier: 1
+    published: 2018
+    retrieved: 2026-09-02
+    note: The practical companion — choosing what to measure, with worked examples
+
+  - id: aws-builders-library
+    title: Amazon Builders' Library
+    url: https://aws.amazon.com/builders-library/
+    publisher: Amazon Web Services
+    runs_the_system: true
+    tier: 1
+    undated: true
+    retrieved: 2026-09-02
+    note: >-
+      A continuously updated collection with no single publication date. Individual
+      articles are dated; the library as a whole is not.
+
+  - id: aws-timeouts-retries
+    title: "Timeouts, retries and backoff with jitter"
+    url: https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/
+    publisher: Amazon Web Services
+    runs_the_system: true
+    tier: 1
+    undated: true
+    retrieved: 2026-09-02
+    note: Read in full in week 9. Week 1 uses only the idea that a timeout is part of a budget
+
+  - id: slack-rtm-2023
+    title: Real-time Messaging
+    url: https://slack.engineering/real-time-messaging/
+    publisher: Slack Engineering
+    author: Sameera Thanugdu
+    runs_the_system: true
+    tier: 1
+    published: 2023-04-11
+    retrieved: 2026-09-02
+    note: Day 4's primary source. Named author, own domain, recent, specific numbers
+
+  - id: latency-gist
+    title: Latency numbers every programmer should know
+    url: https://gist.github.com/jboner/2841832
+    publisher: GitHub gist
+    tier: 3
+    undated: true
+    retrieved: 2026-09-02
+    note: >-
+      A transcription by a third party of numbers originally presented by Jeff Dean
+      (Google) in talk slides. The single clearest example in this course of a
+      load-bearing number with no primary source.
+
+  - id: norvig-timings
+    title: "Teach Yourself Programming in Ten Years — approximate timings"
+    url: https://norvig.com/21-days.html
+    publisher: Peter Norvig
+    author: Peter Norvig
+    tier: 2
+    undated: true
+    retrieved: 2026-09-02
+    note: >-
+      One of the earliest published versions of the timings table, by a named author
+      on his own site. The essay has been revised over many years, so no single
+      publication date fits it.
+
+claims:
+  - id: hundred-percent-is-wrong
+    text: >-
+      An availability target of 100% is the wrong target, because the user's own
+      network fails more often than a well-run service does.
+    kind: known
+    sources: [sre-book-slo]
+
+  - id: error-budget-is-spendable
+    text: >-
+      The downtime an SLO permits is a budget to be spent deliberately on releases and
+      changes, rather than a margin to be minimised.
+    kind: known
+    sources: [sre-book-slo, sre-workbook-slo]
+
+  - id: slack-consistent-hashing
+    text: >-
+      Slack's Channel Servers are stateful and in-memory, and each maps to a subset of
+      channels by consistent hashing.
+    kind: known
+    sources: [slack-rtm-2023]
+
+  - id: slack-peak-hours
+    text: >-
+      Slack's traffic peaks around 11am and 2pm with a dip at lunch, and spikes at the
+      top of the hour from reminders and calendar events.
+    kind: known
+    sources: [slack-rtm-2023]
+
+  - id: peak-factor-rule
+    text: >-
+      Where no measured peak is available, assuming a 5x peak over the daily average
+      is a reasonable starting point for a single-country consumer workload.
+    kind: inferred
+    sources: [slack-rtm-2023]
+    note: >-
+      Our rule of thumb, informed by the shape Slack describes. No source states a
+      general multiplier, and anyone who gives you one without a workload attached is
+      guessing.
+
+  - id: latency-ratios-outlive-values
+    text: >-
+      The ratios in the latency table (memory ~100x faster than SSD, SSD ~100x faster
+      than a cross-country hop) remain useful even though several absolute values are
+      now materially out of date.
+    kind: inferred
+    sources: [latency-gist, norvig-timings]
+
+  - id: latency-table-origin
+    text: >-
+      There is no dated, first-party publication of the canonical latency table by its
+      original author.
+    kind: unknown
+
+  - id: slack-500ms-percentile
+    text: >-
+      Whether Slack's stated 500 ms worldwide delivery figure is a median, a p99, or a
+      round number.
+    kind: unknown

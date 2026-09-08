@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 280" width="760" height="280" role="img" aria-label="The three states of a circuit breaker">
+  <rect width="760" height="280" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="380" y="30" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="700" fill="#0f172a">Three states, and the one that does the work is in the middle</text>
+
+  <g font-family="system-ui,sans-serif" font-size="12">
+    <circle cx="140" cy="120" r="52" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+    <text x="140" y="116" text-anchor="middle" fill="#166534" font-weight="700">closed</text>
+    <text x="140" y="134" text-anchor="middle" fill="#334155" font-size="11">calls pass</text>
+
+    <circle cx="380" cy="120" r="52" fill="#fee2e2" stroke="#ef4444" stroke-width="2"/>
+    <text x="380" y="116" text-anchor="middle" fill="#991b1b" font-weight="700">open</text>
+    <text x="380" y="134" text-anchor="middle" fill="#334155" font-size="11">fail instantly</text>
+
+    <circle cx="620" cy="120" r="52" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+    <text x="620" y="112" text-anchor="middle" fill="#92400e" font-weight="700">half-open</text>
+    <text x="620" y="130" text-anchor="middle" fill="#334155" font-size="11">one probe</text>
+    <text x="620" y="146" text-anchor="middle" fill="#334155" font-size="11">at a time</text>
+  </g>
+
+  <g stroke="#94a3b8" stroke-width="1.6" fill="none" marker-end="url(#w9a)">
+    <path d="M194 104 H326"/>
+    <path d="M434 136 H566"/>
+    <path d="M600 172 Q 380 240 160 172"/>
+  </g>
+  <defs><marker id="w9a" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="#94a3b8"/></marker></defs>
+  <text x="260" y="96" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#334155">failure rate over threshold</text>
+  <text x="500" y="128" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#334155">after a cool-off</text>
+  <text x="380" y="232" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#334155">the probe succeeds</text>
+
+  <rect x="40" y="246" width="680" height="0" fill="none"/>
+  <text x="40" y="266" font-family="system-ui,sans-serif" font-size="11" fill="#64748b">Without half-open, recovery is a stampede: every client resumes at once and knocks the service straight back down.</text>
+</svg>

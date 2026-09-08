@@ -1,0 +1,192 @@
+# Week 4's reading, recorded properly.
+
+system: Week 4 reading — partitioning, hashing, hot keys, ids
+
+sources:
+  - id: dynamo-2007
+    title: "Dynamo: Amazon's Highly Available Key-value Store"
+    url: https://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf
+    publisher: Amazon
+    author: DeCandia et al.
+    kind: paper
+    runs_the_system: true
+    tier: 1
+    published: 2007
+    retrieved: 2026-09-02
+    note: §4.2 for consistent hashing and the virtual-node argument
+
+  - id: bigtable-2006
+    title: "Bigtable: A Distributed Storage System for Structured Data"
+    url: https://research.google/pubs/bigtable-a-distributed-storage-system-for-structured-data/
+    publisher: Google
+    author: Chang et al.
+    kind: paper
+    runs_the_system: true
+    tier: 1
+    published: 2006
+    retrieved: 2026-09-02
+    note: Range partitioning — tablets, splits, and the row-key ordering
+
+  - id: slicer-2016
+    title: "Slicer: Auto-Sharding for Datacenter Applications"
+    url: https://research.google/pubs/slicer-auto-sharding-for-datacenter-applications/
+    publisher: Google
+    author: Adya et al.
+    kind: paper
+    runs_the_system: true
+    tier: 1
+    published: 2016
+    retrieved: 2026-09-02
+    note: Measured key-load imbalance, and automatic hot-key movement
+
+  - id: tail-at-scale
+    title: The Tail at Scale
+    url: https://research.google/pubs/the-tail-at-scale/
+    publisher: Google
+    author: Jeffrey Dean and Luiz André Barroso
+    kind: paper
+    runs_the_system: true
+    tier: 1
+    published: 2013
+    retrieved: 2026-09-02
+    note: Selective replication and micro-partitioning as hot-key remedies
+
+  - id: snowflake-twitter
+    title: Twitter Snowflake
+    url: https://github.com/twitter-archive/snowflake
+    publisher: Twitter
+    kind: official_docs
+    runs_the_system: true
+    tier: 1
+    undated: true
+    retrieved: 2026-09-02
+    note: >-
+      Archived repository. The README states the requirements that produced the
+      layout. No publication date; the archive notice postdates the design.
+
+  - id: discord-messages
+    title: How Discord Stores Billions of Messages
+    url: https://discord.com/blog/how-discord-stores-billions-of-messages
+    publisher: Discord
+    runs_the_system: true
+    tier: 1
+    undated: true
+    retrieved: 2026-09-02
+    note: A named engineer on choosing a partition key, and what happened when one bucket grew
+
+  - id: cassandra-dynamo
+    title: "Cassandra — Dynamo-derived architecture"
+    url: https://cassandra.apache.org/doc/latest/cassandra/architecture/dynamo.html
+    publisher: Apache Cassandra
+    kind: official_docs
+    tier: 2
+    undated: true
+    retrieved: 2026-09-02
+    note: Partition key against clustering key, and token assignment
+
+  - id: vitess-sharding
+    title: "Vitess — Sharding"
+    url: https://vitess.io/docs/reference/features/sharding/
+    publisher: Vitess
+    kind: official_docs
+    tier: 2
+    undated: true
+    retrieved: 2026-09-02
+    note: A routing tier in production documentation, including resharding
+
+  - id: karger-1997
+    title: "Consistent Hashing and Random Trees"
+    url: https://doi.org/10.1145/258533.258660
+    publisher: ACM STOC
+    author: Karger et al.
+    kind: paper
+    tier: 2
+    published: 1997
+    retrieved: 2026-09-02
+    manual: true
+    note: The original. Paywalled — cited by name and DOI
+
+claims:
+  - id: virtual-nodes
+    text: >-
+      Assigning each physical node many positions on the ring evens out the distribution
+      and spreads a departing node's load across the whole cluster rather than onto its
+      single clockwise neighbour.
+    kind: known
+    sources: [dynamo-2007, cassandra-dynamo]
+
+  - id: consistent-hashing-moves-one-nth
+    text: >-
+      Under consistent hashing, adding or removing a node moves only the keys in that
+      node's arc, rather than remapping most of the key space.
+    kind: known
+    sources: [dynamo-2007, karger-1997]
+
+  - id: bigtable-range-splits
+    text: >-
+      Bigtable partitions by contiguous row-key ranges, and a range splits when it grows
+      too large, so the partitioning adapts to the actual key distribution.
+    kind: known
+    sources: [bigtable-2006]
+
+  - id: real-load-is-skewed
+    text: >-
+      Key load in real datacentre applications is imbalanced enough that automatic hot-key
+      detection and movement is worth building as a dedicated system.
+    kind: known
+    sources: [slicer-2016]
+
+  - id: selective-replication
+    text: >-
+      Making extra copies of the hot items specifically, rather than everything, is an
+      effective remedy for read hotspots.
+    kind: known
+    sources: [tail-at-scale, slicer-2016]
+
+  - id: snowflake-requirements
+    text: >-
+      Snowflake ids are roughly time-sortable, generated without per-id coordination, and
+      compact — those three requirements produce the timestamp/node/sequence layout.
+    kind: known
+    sources: [snowflake-twitter]
+
+  - id: sortable-means-clustered
+    text: >-
+      Any time-ordered id scheme puts consecutive writes in adjacent key space, so under
+      range partitioning every new write lands on the same partition.
+    kind: inferred
+    sources: [snowflake-twitter, bigtable-2006]
+    note: >-
+      Follows directly from both sources but neither states it as a warning. Demonstrated
+      in the day-4 lab rather than asserted.
+
+  - id: skew-thresholds
+    text: >-
+      A skew below about 1.5 is comfortable and above about 3 is a problem.
+    kind: inferred
+    sources: [slicer-2016]
+    note: >-
+      Our rule of thumb. No source gives thresholds, and anyone who states them more
+      precisely without naming a workload is guessing.
+
+  - id: splitting-versus-ordering
+    text: >-
+      Splitting a hot key across shards is incompatible with preserving order within that
+      key, so a system needing both must weaken one of them.
+    kind: inferred
+    sources: [slicer-2016, tail-at-scale]
+    note: Our framing. It is the whole of the week-4 milestone
+
+  - id: production-skew-figures
+    text: >-
+      What key skew large multi-tenant platforms actually run at, as a published figure.
+    kind: unknown
+    note: >-
+      Slicer reports imbalance for Google's workloads; nothing general exists, and skew is
+      entirely a property of a specific customer base.
+
+  - id: resharding-duration
+    text: >-
+      How long a live resharding of a large dataset takes, and what it does to latency
+      while it runs.
+    kind: unknown

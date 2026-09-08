@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" width="760" height="300" role="img" aria-label="An error budget being consumed at three different rates">
+  <rect width="760" height="300" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="380" y="30" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="700" fill="#0f172a">The same outage, described three ways</text>
+
+  <g stroke="#94a3b8" stroke-width="1.2" fill="none"><path d="M80 240 H700"/><path d="M80 60 V240"/></g>
+  <g font-family="system-ui,sans-serif" font-size="11" fill="#64748b">
+    <text x="80" y="262" text-anchor="middle">day 0</text>
+    <text x="700" y="262" text-anchor="middle">day 28</text>
+    <text x="46" y="66">100%</text><text x="52" y="244">0%</text>
+    <text x="30" y="150" >budget</text>
+  </g>
+
+  <path d="M80 60 L700 240" fill="none" stroke="#86efac" stroke-width="2.4"/>
+  <text x="600" y="196" font-family="system-ui,sans-serif" font-size="11" fill="#166534">burn rate 1 &#8212; exactly on budget</text>
+
+  <path d="M80 60 L390 240" fill="none" stroke="#fcd34d" stroke-width="2.4"/>
+  <text x="300" y="196" font-family="system-ui,sans-serif" font-size="11" fill="#92400e">rate 2 &#8212; gone in 14 days</text>
+
+  <path d="M80 60 L142 240" fill="none" stroke="#ef4444" stroke-width="2.4"/>
+  <text x="150" y="100" font-family="system-ui,sans-serif" font-size="11" fill="#b91c1c">rate 10 &#8212; gone in under 3 days</text>
+
+  <rect x="80" y="268" width="620" height="0" fill="none"/>
+  <text x="80" y="286" font-family="system-ui,sans-serif" font-size="11" fill="#334155">A 5% error rate is not an incident on its own. A 5% error rate that empties a month&#8217;s budget in three days is. Alert on the rate, not the number.</text>
+</svg>

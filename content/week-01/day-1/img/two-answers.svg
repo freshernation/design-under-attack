@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" width="760" height="300" role="img" aria-label="A box diagram versus a set of decisions">
+  <rect width="760" height="300" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="380" y="30" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="700" fill="#0f172a">Two answers to the same question</text>
+
+  <text x="30" y="62" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#b91c1c">What most people draw</text>
+  <g font-family="system-ui,sans-serif" font-size="11" fill="#334155">
+    <rect x="30" y="76" width="76" height="34" rx="5" fill="#fff" stroke="#cbd5e1"/><text x="68" y="97" text-anchor="middle">Client</text>
+    <rect x="128" y="76" width="76" height="34" rx="5" fill="#fff" stroke="#cbd5e1"/><text x="166" y="97" text-anchor="middle">LB</text>
+    <rect x="226" y="76" width="76" height="34" rx="5" fill="#fff" stroke="#cbd5e1"/><text x="264" y="97" text-anchor="middle">API</text>
+    <rect x="128" y="130" width="76" height="34" rx="5" fill="#fff" stroke="#cbd5e1"/><text x="166" y="151" text-anchor="middle">Redis</text>
+    <rect x="226" y="130" width="76" height="34" rx="5" fill="#fff" stroke="#cbd5e1"/><text x="264" y="151" text-anchor="middle">Kafka</text>
+    <rect x="177" y="184" width="76" height="34" rx="5" fill="#fff" stroke="#cbd5e1"/><text x="215" y="205" text-anchor="middle">DB</text>
+  </g>
+  <g stroke="#94a3b8" stroke-width="1.4" fill="none">
+    <path d="M106 93 H128"/><path d="M204 93 H226"/><path d="M264 110 V130"/><path d="M226 147 H204"/><path d="M215 164 V184"/>
+  </g>
+  <text x="30" y="248" font-family="system-ui,sans-serif" font-size="11" fill="#b91c1c">Six nouns. No number, no reason,</text>
+  <text x="30" y="264" font-family="system-ui,sans-serif" font-size="11" fill="#b91c1c">nothing anyone could disagree with.</text>
+
+  <line x1="400" y1="52" x2="400" y2="272" stroke="#cbd5e1" stroke-dasharray="4 4"/>
+
+  <text x="428" y="62" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#15803d">What a design answer is</text>
+  <g font-family="system-ui,sans-serif" font-size="11" fill="#334155">
+    <text x="428" y="86">40k reads/s, 400 writes/s — 100:1</text>
+    <text x="428" y="108">so: cache the read path, not the write path</text>
+    <text x="428" y="136">Rejected: read replicas</text>
+    <text x="446" y="152" fill="#64748b">— replication lag breaks read-your-writes</text>
+    <text x="428" y="180">Costs: a stale window of up to 60s</text>
+    <text x="428" y="202">Breaks when: cache is cold — 40k/s hits</text>
+    <text x="446" y="218" fill="#64748b">a database sized for 400/s</text>
+  </g>
+  <text x="428" y="248" font-family="system-ui,sans-serif" font-size="11" fill="#15803d">A decision, its price, and the thing</text>
+  <text x="428" y="264" font-family="system-ui,sans-serif" font-size="11" fill="#15803d">it gives up. You can argue with it.</text>
+</svg>
