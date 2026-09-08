@@ -5,6 +5,8 @@ Neither is about the course material. Both cost an afternoon the first time.
 
 import sys
 from collections import defaultdict
+
+import pytest
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -65,8 +67,16 @@ def test_no_lab_module_shadows_the_standard_library():
 
 def test_every_lab_module_has_a_reference_solution():
     """A lab with no solution cannot be verified, which means its tests have
-    never been shown to be satisfiable."""
+    never been shown to be satisfiable.
+
+    Skipped in a student clone: `instructor/` is a separate private repository and
+    is not there. The check still runs for whoever has it, which is the only person
+    who can act on it.
+    """
     solutions = ROOT / "instructor" / "solutions"
+    if not solutions.is_dir():
+        pytest.skip("instructor/ is a separate private repository and is not present")
+
     missing = []
     for name, paths in _lab_modules().items():
         for path in paths:
