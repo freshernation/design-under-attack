@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" width="760" height="300" role="img" aria-label="A thousand concurrent misses hitting the origin, and the same misses coalesced into one">
+  <rect width="760" height="300" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="380" y="30" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="700" fill="#0f172a">One key expires. A thousand requests notice at the same instant.</text>
+
+  <text x="30" y="62" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#b91c1c">Without coalescing</text>
+  <g stroke="#fca5a5" stroke-width="1.2" fill="none">
+    <path d="M40 84 L170 150"/><path d="M60 84 L170 150"/><path d="M80 84 L170 150"/><path d="M100 84 L170 150"/>
+    <path d="M120 84 L170 150"/><path d="M140 84 L170 150"/><path d="M160 84 L170 150"/><path d="M180 84 L170 150"/>
+    <path d="M200 84 L170 150"/><path d="M220 84 L170 150"/><path d="M240 84 L170 150"/><path d="M260 84 L170 150"/>
+  </g>
+  <text x="150" y="78" font-family="system-ui,sans-serif" font-size="10" fill="#b91c1c">1,000 misses</text>
+  <rect x="110" y="152" width="120" height="36" rx="5" fill="#fee2e2" stroke="#ef4444"/>
+  <text x="170" y="175" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#991b1b">origin</text>
+  <text x="170" y="212" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#991b1b">1,000 identical queries</text>
+  <text x="170" y="230" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#991b1b">for the same row</text>
+  <text x="170" y="256" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#334155">999 of them are pure waste,</text>
+  <text x="170" y="272" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#334155">and they arrive together</text>
+
+  <line x1="380" y1="46" x2="380" y2="284" stroke="#cbd5e1" stroke-dasharray="4 4"/>
+
+  <text x="410" y="62" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#15803d">With single-flight</text>
+  <g stroke="#86efac" stroke-width="1.2" fill="none">
+    <path d="M420 84 L560 128"/><path d="M440 84 L560 128"/><path d="M460 84 L560 128"/><path d="M480 84 L560 128"/>
+    <path d="M500 84 L560 128"/><path d="M520 84 L560 128"/><path d="M540 84 L560 128"/><path d="M560 84 L560 128"/>
+    <path d="M580 84 L560 128"/><path d="M600 84 L560 128"/><path d="M620 84 L560 128"/><path d="M640 84 L560 128"/>
+  </g>
+  <text x="530" y="78" font-family="system-ui,sans-serif" font-size="10" fill="#166534">1,000 misses</text>
+  <rect x="500" y="130" width="120" height="32" rx="5" fill="#dcfce7" stroke="#22c55e"/>
+  <text x="560" y="151" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#166534">in-flight map</text>
+  <g stroke="#22c55e" stroke-width="2" fill="none" marker-end="url(#w6c)"><path d="M560 164 V196"/></g>
+  <defs><marker id="w6c" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="#22c55e"/></marker></defs>
+  <rect x="500" y="198" width="120" height="32" rx="5" fill="#fff" stroke="#cbd5e1"/>
+  <text x="560" y="219" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#334155">origin</text>
+  <text x="560" y="252" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#15803d">one query. The other 999 wait</text>
+  <text x="560" y="268" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#15803d">for its result. Twenty lines of code.</text>
+</svg>

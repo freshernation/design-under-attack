@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" width="760" height="300" role="img" aria-label="An order book with bids and asks, and a matching engine that is deliberately single threaded">
+  <rect width="760" height="300" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="380" y="30" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="700" fill="#0f172a">Price, then time. And exactly one thread deciding.</text>
+
+  <text x="60" y="62" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#166534">Bids &#8212; highest first</text>
+  <g font-family="ui-monospace,Menlo,monospace" font-size="11" fill="#334155">
+    <rect x="40" y="76" width="220" height="24" rx="3" fill="#dcfce7" stroke="#86efac"/><text x="54" y="93">100.05  &#215; 500   09:00:01.100</text>
+    <rect x="40" y="104" width="220" height="24" rx="3" fill="#dcfce7" stroke="#86efac"/><text x="54" y="121">100.05  &#215; 200   09:00:01.400</text>
+    <rect x="40" y="132" width="220" height="24" rx="3" fill="#f0fdf4" stroke="#bbf7d0"/><text x="54" y="149">100.04  &#215; 900   09:00:00.900</text>
+  </g>
+  <text x="40" y="176" font-family="system-ui,sans-serif" font-size="10" fill="#166534">same price &#8594; earlier order fills first</text>
+
+  <text x="500" y="62" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#991b1b">Asks &#8212; lowest first</text>
+  <g font-family="ui-monospace,Menlo,monospace" font-size="11" fill="#334155">
+    <rect x="480" y="76" width="220" height="24" rx="3" fill="#fee2e2" stroke="#fca5a5"/><text x="494" y="93">100.06  &#215; 300   09:00:01.050</text>
+    <rect x="480" y="104" width="220" height="24" rx="3" fill="#fef2f2" stroke="#fecaca"/><text x="494" y="121">100.07  &#215; 800   09:00:01.200</text>
+  </g>
+
+  <text x="380" y="200" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#334155">spread: 100.05 &#8212; 100.06</text>
+
+  <rect x="40" y="220" width="680" height="60" rx="6" fill="#fffbeb" stroke="#fcd34d"/>
+  <text x="58" y="242" font-family="system-ui,sans-serif" font-size="12" font-weight="600" fill="#92400e">Why one thread, on purpose</text>
+  <text x="58" y="262" font-family="system-ui,sans-serif" font-size="11" fill="#334155">Two threads matching the same book need a lock on every operation, and the lock is slower than the matching.</text>
+  <text x="58" y="278" font-family="system-ui,sans-serif" font-size="11" fill="#334155">One thread with a sequenced input log is faster, deterministic, and replayable &#8212; which is what auditors want anyway.</text>
+</svg>

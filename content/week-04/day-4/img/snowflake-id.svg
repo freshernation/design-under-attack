@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 280" width="760" height="280" role="img" aria-label="A 64-bit id split into timestamp, node and sequence, and what each part buys">
+  <rect width="760" height="280" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="380" y="30" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="700" fill="#0f172a">64 bits, three fields, no coordination</text>
+
+  <g font-family="system-ui,sans-serif" font-size="11">
+    <rect x="40" y="56" width="380" height="46" rx="5" fill="#dbeafe" stroke="#93c5fd"/>
+    <text x="230" y="76" text-anchor="middle" font-weight="700" fill="#1e3a8a">timestamp &#8212; 41 bits</text>
+    <text x="230" y="94" text-anchor="middle" fill="#334155">milliseconds since an epoch you choose</text>
+
+    <rect x="426" y="56" width="150" height="46" rx="5" fill="#dcfce7" stroke="#86efac"/>
+    <text x="501" y="76" text-anchor="middle" font-weight="700" fill="#166534">node &#8212; 10 bits</text>
+    <text x="501" y="94" text-anchor="middle" fill="#334155">1,024 generators</text>
+
+    <rect x="582" y="56" width="138" height="46" rx="5" fill="#fef3c7" stroke="#fcd34d"/>
+    <text x="651" y="76" text-anchor="middle" font-weight="700" fill="#92400e">seq &#8212; 12 bits</text>
+    <text x="651" y="94" text-anchor="middle" fill="#334155">4,096 per ms</text>
+  </g>
+
+  <g font-family="system-ui,sans-serif" font-size="11" fill="#64748b">
+    <text x="40" y="126">time first, so ids sort by</text>
+    <text x="40" y="142">creation order</text>
+    <text x="426" y="126">unique per generator,</text>
+    <text x="426" y="142">so no lock is needed</text>
+    <text x="582" y="126">4 million ids per</text>
+    <text x="582" y="142">second per node</text>
+  </g>
+
+  <rect x="40" y="164" width="680" height="94" rx="6" fill="#fffbeb" stroke="#fcd34d"/>
+  <text x="58" y="186" font-family="system-ui,sans-serif" font-size="12" font-weight="600" fill="#92400e">And the sting: sortable means clustered</text>
+  <text x="58" y="208" font-family="system-ui,sans-serif" font-size="11" fill="#334155">Time-ordered ids are adjacent, so in a range-partitioned store every new row lands in the same partition.</text>
+  <text x="58" y="226" font-family="system-ui,sans-serif" font-size="11" fill="#334155">The property that makes them pleasant to sort is the property that makes them a write hotspot.</text>
+  <text x="58" y="248" font-family="system-ui,sans-serif" font-size="11" fill="#64748b">You may have locality or evenness. Choosing without noticing is how a design acquires a hot partition.</text>
+</svg>

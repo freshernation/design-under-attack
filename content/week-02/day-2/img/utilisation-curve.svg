@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 340" width="760" height="340" role="img" aria-label="Waiting time against utilisation, showing the knee near 80 percent">
+  <rect width="760" height="340" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="380" y="30" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="700" fill="#0f172a">Latency against utilisation — the shape that surprises everyone</text>
+
+  <g stroke="#94a3b8" stroke-width="1.2" fill="none"><path d="M80 280 H700"/><path d="M80 60 V280"/></g>
+  <path d="M80 258 L172 254 L264 246 L356 236 L448 214 L494 192 L540 158 L586 118 L618 84 L640 62"
+        fill="none" stroke="#2563eb" stroke-width="2.4"/>
+
+  <g stroke-dasharray="4 3" stroke-width="1.4">
+    <path d="M494 60 V280" stroke="#d97706"/>
+    <path d="M586 60 V280" stroke="#b91c1c"/>
+  </g>
+  <g font-family="system-ui,sans-serif" font-size="11">
+    <text x="494" y="52" text-anchor="middle" fill="#d97706" font-weight="600">80% — the knee</text>
+    <text x="596" y="52" fill="#b91c1c" font-weight="600">90%</text>
+    <text x="380" y="304" text-anchor="middle" fill="#64748b">utilisation &#961;</text>
+    <text x="96" y="76" fill="#64748b">wait</text>
+    <text x="100" y="272" fill="#64748b">0%</text>
+    <text x="352" y="272" fill="#64748b">50%</text>
+    <text x="672" y="272" fill="#64748b">100%</text>
+  </g>
+
+  <rect x="96" y="86" width="290" height="112" rx="6" fill="#fff" stroke="#cbd5e1"/>
+  <g font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="12" fill="#0f172a">
+    <text x="112" y="108">&#961; = 0.50   wait = 1.0 &#215; service time</text>
+    <text x="112" y="128">&#961; = 0.80   wait = 4.0 &#215;</text>
+    <text x="112" y="148">&#961; = 0.90   wait = 9.0 &#215;</text>
+    <text x="112" y="168">&#961; = 0.95   wait = 19.0 &#215;</text>
+    <text x="112" y="188">&#961; = 0.99   wait = 99.0 &#215;</text>
+  </g>
+  <text x="404" y="122" font-family="system-ui,sans-serif" font-size="11" fill="#334155">Going from 80% to 90% utilised does not</text>
+  <text x="404" y="138" font-family="system-ui,sans-serif" font-size="11" fill="#334155">cost you 12% more latency. It roughly</text>
+  <text x="404" y="154" font-family="system-ui,sans-serif" font-size="11" fill="#334155">doubles it, and 95% doubles it again.</text>
+  <text x="404" y="180" font-family="system-ui,sans-serif" font-size="11" fill="#64748b">M/M/1, wait in queue = &#961;/(1&#8722;&#961;) &#215; service time.</text>
+  <text x="404" y="196" font-family="system-ui,sans-serif" font-size="11" fill="#64748b">Real systems are worse — see variability.</text>
+</svg>

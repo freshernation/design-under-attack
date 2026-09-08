@@ -1,0 +1,210 @@
+# Week 7's reading, recorded properly.
+
+system: Week 7 reading — logs, queues, delivery guarantees, idempotency
+
+sources:
+  - id: kafka-design
+    title: "Apache Kafka — Design"
+    url: https://kafka.apache.org/documentation/#design
+    publisher: Apache Kafka
+    kind: official_docs
+    runs_the_system: true
+    tier: 1
+    undated: true
+    retrieved: 2026-09-02
+    note: Partitions, offsets, retention, consumer groups, and the ordering guarantee
+
+  - id: kafka-semantics
+    title: "Apache Kafka — Message Delivery Semantics"
+    url: https://kafka.apache.org/documentation/#semantics
+    publisher: Apache Kafka
+    kind: official_docs
+    runs_the_system: true
+    tier: 1
+    undated: true
+    retrieved: 2026-09-02
+    note: >-
+      Unusually careful about what "exactly once" means: idempotent producers and
+      transactional writes, both scoped to what the system can actually see.
+
+  - id: kafka-consumer-configs
+    title: "Apache Kafka — consumer configuration"
+    url: https://kafka.apache.org/documentation/#consumerconfigs
+    publisher: Apache Kafka
+    kind: official_docs
+    runs_the_system: true
+    tier: 1
+    undated: true
+    retrieved: 2026-09-02
+
+  - id: kreps-the-log
+    title: "The Log: What every software engineer should know about real-time data's unifying abstraction"
+    url: https://engineering.linkedin.com/distributed-systems/log-what-every-software-engineer-should-know-about-real-time-datas-unifying
+    publisher: LinkedIn Engineering
+    author: Jay Kreps
+    runs_the_system: true
+    tier: 1
+    published: 2013-12-16
+    retrieved: 2026-09-02
+    manual: true
+    note: >-
+      Written by the person who built Kafka at the company that ran it, which makes it
+      tier 1. LinkedIn's blog refuses automated fetches, so this one is checked by hand.
+
+  - id: sqs-visibility
+    title: "Amazon SQS — visibility timeout"
+    url: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html
+    publisher: Amazon Web Services
+    kind: official_docs
+    runs_the_system: true
+    tier: 1
+    undated: true
+    retrieved: 2026-09-02
+    note: The mechanism that produces at-least-once, documented precisely by an operator
+
+  - id: sqs-guide
+    title: "Amazon SQS — developer guide"
+    url: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/welcome.html
+    publisher: Amazon Web Services
+    kind: official_docs
+    runs_the_system: true
+    tier: 1
+    undated: true
+    retrieved: 2026-09-02
+
+  - id: pubsub-subscriptions
+    title: "Google Pub/Sub — subscriptions"
+    url: https://cloud.google.com/pubsub/docs/subscription-overview
+    publisher: Google Cloud
+    kind: official_docs
+    runs_the_system: true
+    tier: 1
+    undated: true
+    retrieved: 2026-09-02
+    note: The same guarantees under different names — ack deadlines, ordering keys
+
+  - id: stripe-idempotency
+    title: "Stripe — idempotent requests"
+    url: https://docs.stripe.com/api/idempotent_requests
+    publisher: Stripe
+    kind: official_docs
+    runs_the_system: true
+    tier: 1
+    undated: true
+    retrieved: 2026-09-02
+    note: >-
+      The idempotency-key contract, including key retention and what happens when a key is
+      reused with a different payload — the detail most implementations get wrong.
+
+  - id: debezium-outbox
+    title: "Debezium — outbox event router"
+    url: https://debezium.io/documentation/reference/stable/transformations/outbox-event-router.html
+    publisher: Debezium
+    kind: official_docs
+    runs_the_system: true
+    tier: 1
+    undated: true
+    retrieved: 2026-09-02
+
+  - id: kleppmann-dual-writes
+    title: "Using logs to build a solid data infrastructure (or: why dual writes are a bad idea)"
+    url: https://www.confluent.io/blog/using-logs-to-build-a-solid-data-infrastructure-or-why-dual-writes-are-a-bad-idea/
+    publisher: Confluent
+    author: Martin Kleppmann
+    tier: 3
+    undated: true
+    retrieved: 2026-09-02
+    note: >-
+      The same tier boundary as week 5's locking post: analysis rather than first-party,
+      and the origin of how most people now frame the problem.
+
+claims:
+  - id: log-retains-after-read
+    text: >-
+      A log does not delete a record when it is consumed; consumers hold offsets, so many
+      consumers can read the same records independently and any of them can replay.
+    kind: known
+    sources: [kafka-design, kreps-the-log]
+
+  - id: ordering-is-per-partition
+    text: >-
+      Records are ordered within a partition and have no ordering relationship across
+      partitions, so the ordering guarantee is whatever the partition key provides.
+    kind: known
+    sources: [kafka-design, pubsub-subscriptions]
+
+  - id: consumers-capped-by-partitions
+    text: >-
+      Each partition is assigned to at most one consumer in a group, so partition count is
+      a ceiling on consumer parallelism.
+    kind: known
+    sources: [kafka-design]
+
+  - id: visibility-timeout
+    text: >-
+      A received message becomes invisible for a configured period rather than being
+      deleted, and reappears if the consumer does not delete it in time.
+    kind: known
+    sources: [sqs-visibility]
+
+  - id: no-exactly-once-delivery
+    text: >-
+      Exactly-once delivery is not achievable; what systems provide is at-least-once
+      delivery combined with idempotent producers, transactional writes, or idempotent
+      effects.
+    kind: known
+    sources: [kafka-semantics]
+
+  - id: idempotency-key-contract
+    text: >-
+      An idempotency key is supplied by the client, the stored result is returned on a
+      repeat, keys expire after a bounded window, and reuse with a different payload is an
+      error rather than a duplicate.
+    kind: known
+    sources: [stripe-idempotency]
+
+  - id: outbox-pattern
+    text: >-
+      Writing the state change and the event to the same database in one transaction, then
+      relaying the event separately, removes the dual write at the cost of possible
+      duplicate publication.
+    kind: known
+    sources: [debezium-outbox, kleppmann-dual-writes]
+
+  - id: cdc-couples-schema
+    text: >-
+      Change data capture publishes table changes rather than chosen events, so consumers
+      become coupled to the producer's table schema.
+    kind: inferred
+    sources: [debezium-outbox]
+    note: Follows from what CDC emits; the coupling is our framing of the consequence
+
+  - id: replay-is-a-duplicate-source
+    text: >-
+      Deliberate replay produces duplicates separated by the replay depth, which is
+      usually far longer than any accidental redelivery.
+    kind: inferred
+    sources: [kafka-design, stripe-idempotency]
+    note: >-
+      The reason the week-7 milestone cannot use a deduplication window for replay. Both
+      sources imply it; neither states it as a design constraint.
+
+  - id: recomputation-beats-deduplication
+    text: >-
+      Recomputing an aggregate from its inputs is idempotent at any replay depth and needs
+      no deduplication state, whereas incrementing needs a window as deep as the replay.
+    kind: derived
+    note: >-
+      Arithmetic plus the idempotency of assignment. Worked in the week-7 milestone lab.
+
+  - id: real-duplicate-rates
+    text: >-
+      What duplicate rates production message systems actually exhibit.
+    kind: unknown
+    note: Depends entirely on failure rates and consumer behaviour; no general figure exists
+
+  - id: rebalance-durations
+    text: >-
+      How long a consumer group rebalance takes in practice, and how much throughput it
+      costs during a rolling deploy.
+    kind: unknown

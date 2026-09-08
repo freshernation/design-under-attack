@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 320" width="760" height="320" role="img" aria-label="Five places to cache, from the browser to the database buffer pool, with what each costs to invalidate">
+  <rect width="760" height="320" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="380" y="30" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="700" fill="#0f172a">The further from the origin, the cheaper the hit and the harder the invalidation</text>
+
+  <g font-family="system-ui,sans-serif" font-size="12">
+    <g>
+      <rect x="40" y="54" width="200" height="42" rx="5" fill="#dbeafe" stroke="#93c5fd"/>
+      <text x="56" y="80" font-weight="600" fill="#1e3a8a">Browser</text>
+      <text x="262" y="72" fill="#334155">0 ms, 0 bytes of yours</text>
+      <text x="262" y="88" fill="#b91c1c">you cannot invalidate it at all</text>
+    </g>
+    <g>
+      <rect x="60" y="104" width="200" height="42" rx="5" fill="#dbeafe" stroke="#93c5fd"/>
+      <text x="76" y="130" font-weight="600" fill="#1e3a8a">CDN / edge</text>
+      <text x="282" y="122" fill="#334155">10&#8211;30 ms, near the user</text>
+      <text x="282" y="138" fill="#92400e">purge is an API call and takes seconds</text>
+    </g>
+    <g>
+      <rect x="80" y="154" width="200" height="42" rx="5" fill="#dcfce7" stroke="#86efac"/>
+      <text x="96" y="180" font-weight="600" fill="#166534">Shared cache tier</text>
+      <text x="302" y="172" fill="#334155">1 ms, one network hop</text>
+      <text x="302" y="188" fill="#166534">you control it; it can fail</text>
+    </g>
+    <g>
+      <rect x="100" y="204" width="200" height="42" rx="5" fill="#dcfce7" stroke="#86efac"/>
+      <text x="116" y="230" font-weight="600" fill="#166534">In-process</text>
+      <text x="322" y="222" fill="#334155">100 ns, no hop</text>
+      <text x="322" y="238" fill="#92400e">one copy per process, all disagreeing</text>
+    </g>
+    <g>
+      <rect x="120" y="254" width="200" height="42" rx="5" fill="#f1f5f9" stroke="#cbd5e1"/>
+      <text x="136" y="280" font-weight="600" fill="#334155">Buffer pool</text>
+      <text x="342" y="272" fill="#334155">already there, already correct</text>
+      <text x="342" y="288" fill="#166534">the one you did not have to build</text>
+    </g>
+  </g>
+</svg>

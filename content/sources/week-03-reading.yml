@@ -1,0 +1,197 @@
+# Week 3's reading, recorded properly.
+
+system: Week 3 reading — access patterns, storage engines, durability
+
+sources:
+  - id: dynamo-2007
+    title: "Dynamo: Amazon's Highly Available Key-value Store"
+    url: https://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf
+    publisher: Amazon
+    author: DeCandia et al.
+    kind: paper
+    runs_the_system: true
+    tier: 1
+    published: 2007
+    retrieved: 2026-09-02
+    note: >-
+      A paper by the team that ran the system, which makes it tier 1 rather than tier 2.
+      §2 is the argument that query patterns rather than data shape decided the store.
+
+  - id: bigtable-2006
+    title: "Bigtable: A Distributed Storage System for Structured Data"
+    url: https://research.google/pubs/bigtable-a-distributed-storage-system-for-structured-data/
+    publisher: Google
+    author: Chang et al.
+    kind: paper
+    runs_the_system: true
+    tier: 1
+    published: 2006
+    retrieved: 2026-09-02
+    note: §2 for the data model, §5.3–5.4 for memtable, SSTable and compaction
+
+  - id: leveldb-impl
+    title: LevelDB implementation notes
+    url: https://github.com/google/leveldb/blob/main/doc/impl.md
+    publisher: Google
+    kind: official_docs
+    runs_the_system: true
+    tier: 1
+    undated: true
+    retrieved: 2026-09-02
+    note: >-
+      Four pages, and the clearest description of an LSM tree in existence. Living
+      documentation in a repository, so no single publication date fits it.
+
+  - id: rocksdb-overview
+    title: RocksDB Overview
+    url: https://github.com/facebook/rocksdb/wiki/RocksDB-Overview
+    publisher: Meta
+    kind: official_docs
+    runs_the_system: true
+    tier: 1
+    undated: true
+    retrieved: 2026-09-02
+
+  - id: rocksdb-leveled
+    title: Leveled Compaction
+    url: https://github.com/facebook/rocksdb/wiki/Leveled-Compaction
+    publisher: Meta
+    kind: official_docs
+    runs_the_system: true
+    tier: 1
+    undated: true
+    retrieved: 2026-09-02
+
+  - id: lsm-tree-1996
+    title: The Log-Structured Merge-Tree (LSM-Tree)
+    url: https://www.cs.umb.edu/~poneil/lsmtree.pdf
+    publisher: Acta Informatica
+    author: O'Neil, Cheng, Gawlick, O'Neil
+    kind: paper
+    tier: 2
+    published: 1996
+    retrieved: 2026-09-02
+
+  - id: rum-conjecture
+    title: "Designing Access Methods: The RUM Conjecture"
+    url: https://openproceedings.org/2016/conf/edbt/paper-12.pdf
+    publisher: EDBT
+    author: Athanassoulis et al.
+    kind: paper
+    tier: 2
+    published: 2016
+    retrieved: 2026-09-02
+    note: The formal statement that read, update and memory overheads cannot all be minimised
+
+  - id: postgres-wal
+    title: "PostgreSQL — Write-Ahead Logging"
+    url: https://www.postgresql.org/docs/current/wal-intro.html
+    publisher: PostgreSQL Global Development Group
+    kind: official_docs
+    tier: 2
+    undated: true
+    retrieved: 2026-09-02
+    note: Versioned docs with no single publication date; this is the "current" page
+
+  - id: sqlite-atomic-commit
+    title: Atomic Commit In SQLite
+    url: https://www.sqlite.org/atomiccommit.html
+    publisher: SQLite
+    kind: official_docs
+    tier: 2
+    undated: true
+    retrieved: 2026-09-02
+    note: The most concrete free account of what has to happen for a commit to survive a power cut
+
+  - id: postgres-indexes
+    title: "PostgreSQL — Indexes"
+    url: https://www.postgresql.org/docs/current/indexes.html
+    publisher: PostgreSQL Global Development Group
+    kind: official_docs
+    tier: 2
+    undated: true
+    retrieved: 2026-09-02
+
+claims:
+  - id: access-patterns-decide
+    text: >-
+      Dynamo's design was driven by Amazon's query patterns — primary-key access to small
+      objects — rather than by the shape of the data, and that is what justified dropping
+      relational querying.
+    kind: known
+    sources: [dynamo-2007]
+
+  - id: row-key-is-the-index
+    text: >-
+      Bigtable maintains data in lexicographic order by row key, and the row key is the
+      only ordering available, so the choice of row key determines which queries are cheap.
+    kind: known
+    sources: [bigtable-2006]
+
+  - id: lsm-shape
+    text: >-
+      A log-structured store buffers writes in a sorted in-memory table, flushes it as an
+      immutable sorted file, and merges those files in the background.
+    kind: known
+    sources: [leveldb-impl, rocksdb-overview, bigtable-2006, lsm-tree-1996]
+
+  - id: deletes-are-tombstones
+    text: >-
+      A delete in a log-structured store writes a marker rather than removing data, and
+      the space is reclaimed only when compaction merges the marker with the older value.
+    kind: known
+    sources: [leveldb-impl, rocksdb-overview]
+
+  - id: rum-tradeoff
+    text: >-
+      Read, update and memory overheads cannot all be minimised simultaneously; improving
+      two worsens the third.
+    kind: known
+    sources: [rum-conjecture]
+
+  - id: leveled-vs-tiered
+    text: >-
+      Leveled compaction gives lower read and space amplification at the cost of higher
+      write amplification; tiered compaction makes the opposite trade.
+    kind: known
+    sources: [rocksdb-leveled, rum-conjecture]
+
+  - id: wal-before-page
+    text: >-
+      Changes are appended to a sequential log and made durable there before the
+      corresponding data pages are written, so a crash leaves a replayable log rather
+      than a half-written structure.
+    kind: known
+    sources: [postgres-wal, sqlite-atomic-commit]
+
+  - id: compaction-is-a-variability-problem
+    text: >-
+      Compaction bursts are service-time spikes, so they raise the p99 by more than the
+      extra work alone accounts for, via the queueing effect of increased variance.
+    kind: inferred
+    sources: [rocksdb-leveled]
+    note: >-
+      Our synthesis of week 2's Kingman material with RocksDB's description of compaction.
+      No source we found states it in these terms.
+
+  - id: our-amplification-formulas
+    text: >-
+      The amplification formulas in the day-2 lab (levels x size ratio, page over row)
+      are simplified models, not measurements.
+    kind: inferred
+    sources: [rocksdb-leveled]
+    note: Stated as such in the lab docstring and in the article. Do not quote them as fact.
+
+  - id: real-amplification-numbers
+    text: >-
+      What write amplification a given engine actually exhibits under a given workload.
+    kind: unknown
+    note: >-
+      Depends on key distribution, config and hardware. Published figures vary by an
+      order of magnitude and are rarely accompanied by the workload that produced them.
+
+  - id: tombstone-drop-timing
+    text: >-
+      When production engines actually drop tombstones, in wall-clock terms, for a
+      given delete rate.
+    kind: unknown

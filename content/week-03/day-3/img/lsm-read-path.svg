@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" width="760" height="300" role="img" aria-label="The read path through a memtable and three sstables, stopping at the first hit">
+  <rect width="760" height="300" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="380" y="30" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="700" fill="#0f172a">get(&quot;k7&quot;) — newest first, and stop at the first answer</text>
+
+  <g font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11">
+    <rect x="60" y="58" width="330" height="34" rx="5" fill="#dcfce7" stroke="#86efac"/>
+    <text x="76" y="80" fill="#166534">memtable   k2, k9</text>
+    <text x="410" y="80" font-family="system-ui,sans-serif" fill="#64748b">no k7 &#8212; keep looking</text>
+
+    <rect x="60" y="102" width="330" height="34" rx="5" fill="#fff" stroke="#cbd5e1"/>
+    <text x="76" y="124" fill="#475569">sstable 3  k1, k4</text>
+    <text x="410" y="124" font-family="system-ui,sans-serif" fill="#64748b">no k7 &#8212; keep looking</text>
+
+    <rect x="60" y="146" width="330" height="34" rx="5" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+    <text x="76" y="168" fill="#92400e">sstable 2  k7 = &quot;banana&quot;</text>
+    <text x="410" y="168" font-family="system-ui,sans-serif" fill="#92400e" font-weight="600">found. Stop here.</text>
+
+    <rect x="60" y="190" width="330" height="34" rx="5" fill="#f1f5f9" stroke="#e2e8f0"/>
+    <text x="76" y="212" fill="#94a3b8">sstable 1  k7 = &quot;apple&quot;</text>
+    <text x="410" y="212" font-family="system-ui,sans-serif" fill="#94a3b8">never read &#8212; and this is why</text>
+  </g>
+
+  <g stroke="#94a3b8" stroke-width="1.4" fill="none" marker-end="url(#lsm)">
+    <path d="M42 75 V102"/><path d="M42 119 V146"/>
+  </g>
+  <defs><marker id="lsm" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="#94a3b8"/></marker></defs>
+
+  <rect x="60" y="242" width="672" height="42" rx="6" fill="#fffbeb" stroke="#fcd34d"/>
+  <text x="76" y="262" font-family="system-ui,sans-serif" font-size="12" fill="#92400e" font-weight="600">The order is the correctness.</text>
+  <text x="76" y="278" font-family="system-ui,sans-serif" font-size="11" fill="#334155">Older files still hold superseded values and tombstones. Read them in the wrong order and you resurrect deleted data.</text>
+</svg>

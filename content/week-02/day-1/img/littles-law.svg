@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" width="760" height="300" role="img" aria-label="Little's Law: arrivals, things in the system, and time in the system">
+  <rect width="760" height="300" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="380" y="30" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="700" fill="#0f172a">L = &#955;W — and you only get to choose two of them</text>
+
+  <rect x="230" y="70" width="300" height="110" rx="8" fill="#eff6ff" stroke="#93c5fd"/>
+  <text x="380" y="94" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" font-weight="600" fill="#1e3a8a">the system</text>
+  <g fill="#60a5fa">
+    <circle cx="278" cy="130" r="11"/><circle cx="312" cy="130" r="11"/><circle cx="346" cy="130" r="11"/>
+    <circle cx="380" cy="130" r="11"/><circle cx="414" cy="130" r="11"/><circle cx="448" cy="130" r="11"/>
+  </g>
+  <text x="380" y="166" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#1e3a8a"><tspan font-weight="700">L</tspan> = how many are in here right now</text>
+
+  <g stroke="#94a3b8" stroke-width="2" fill="none" marker-end="url(#arr)">
+    <path d="M110 125 H222"/><path d="M538 125 H650"/>
+  </g>
+  <defs><marker id="arr" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="#94a3b8"/></marker></defs>
+  <text x="110" y="112" font-family="system-ui,sans-serif" font-size="12" fill="#334155"><tspan font-weight="700">&#955;</tspan> arrivals/sec</text>
+  <text x="548" y="112" font-family="system-ui,sans-serif" font-size="12" fill="#334155">departures</text>
+  <text x="380" y="204" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#334155"><tspan font-weight="700">W</tspan> = how long each one spends inside</text>
+
+  <rect x="60" y="228" width="640" height="52" rx="6" fill="#fff" stroke="#cbd5e1"/>
+  <g font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="12" fill="#0f172a">
+    <text x="80" y="250">concurrency = throughput &#215; latency</text>
+    <text x="80" y="270">100 in flight  =  500 req/s  &#215;  0.2 s</text>
+  </g>
+  <text x="440" y="258" font-family="system-ui,sans-serif" font-size="11" fill="#64748b">No distribution assumed. No queue discipline assumed.</text>
+  <text x="440" y="274" font-family="system-ui,sans-serif" font-size="11" fill="#64748b">Only that the system is stable. That is why it always holds.</text>
+</svg>

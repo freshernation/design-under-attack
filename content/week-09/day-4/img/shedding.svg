@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" width="760" height="300" role="img" aria-label="Goodput against offered load, with and without load shedding">
+  <rect width="760" height="300" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="380" y="30" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="700" fill="#0f172a">Useful work against offered load &#8212; the shape nobody expects</text>
+
+  <g stroke="#94a3b8" stroke-width="1.2" fill="none"><path d="M80 240 H700"/><path d="M80 60 V240"/></g>
+  <g font-family="system-ui,sans-serif" font-size="11" fill="#64748b">
+    <text x="390" y="266" text-anchor="middle">offered load</text>
+    <text x="42" y="150">useful</text><text x="42" y="166">work</text>
+    <text x="300" y="256" text-anchor="middle">capacity</text>
+  </g>
+  <path d="M300 60 V240" stroke="#cbd5e1" stroke-dasharray="4 3"/>
+
+  <path d="M80 240 L300 100 L400 150 L520 210 L680 232" fill="none" stroke="#ef4444" stroke-width="2.4"/>
+  <text x="540" y="190" font-family="system-ui,sans-serif" font-size="11" fill="#b91c1c">without shedding: work is done and</text>
+  <text x="540" y="206" font-family="system-ui,sans-serif" font-size="11" fill="#b91c1c">thrown away past the timeout</text>
+
+  <path d="M80 240 L300 100 L680 100" fill="none" stroke="#22c55e" stroke-width="2.4"/>
+  <text x="470" y="88" font-family="system-ui,sans-serif" font-size="11" fill="#166534">with shedding: excess is refused quickly,</text>
+  <text x="470" y="72" font-family="system-ui,sans-serif" font-size="11" fill="#166534">and everything accepted is served</text>
+
+  <rect x="80" y="272" width="620" height="0" fill="none"/>
+  <text x="80" y="290" font-family="system-ui,sans-serif" font-size="11" fill="#334155">Past capacity, an unprotected service does *less* useful work as load rises &#8212; every answer arrives after its client gave up.</text>
+</svg>

@@ -1,0 +1,185 @@
+# Week 8's reading, recorded properly.
+
+system: Week 8 reading — transports, fan-out, presence, gateway tiers
+
+sources:
+  - id: slack-rtm-2023
+    title: Real-time Messaging
+    url: https://slack.engineering/real-time-messaging/
+    publisher: Slack Engineering
+    author: Sameera Thanugdu
+    runs_the_system: true
+    tier: 1
+    published: 2023-04-11
+    retrieved: 2026-09-02
+    note: >-
+      The same post students took apart in week 1, read four more times this week for
+      four different reasons. Gateway and channel servers, consistent hashing of channels,
+      presence as a separate tier, and the broadcast multiplication.
+
+  - id: slack-flannel
+    title: "Flannel: An Application-Level Edge Cache to Make Slack Scale"
+    url: https://slack.engineering/flannel-an-application-level-edge-cache-to-make-slack-scale/
+    publisher: Slack Engineering
+    runs_the_system: true
+    tier: 1
+    undated: true
+    retrieved: 2026-09-02
+    note: Making a reconnect cheap, which changes the cost of a storm rather than its rate
+
+  - id: discord-elixir
+    title: How Discord Scaled Elixir to 5,000,000 Concurrent Users
+    url: https://discord.com/blog/how-discord-scaled-elixir-to-5-000-000-concurrent-users
+    publisher: Discord
+    runs_the_system: true
+    tier: 1
+    undated: true
+    retrieved: 2026-09-02
+    note: Millions of connections, presence at that scale, and what actually broke
+
+  - id: discord-messages
+    title: How Discord Stores Billions of Messages
+    url: https://discord.com/blog/how-discord-stores-billions-of-messages
+    publisher: Discord
+    runs_the_system: true
+    tier: 1
+    undated: true
+    retrieved: 2026-09-02
+
+  - id: whatsapp-scaling
+    title: "Scaling to Millions of Simultaneous Connections"
+    url: https://www.erlang-factory.com/upload/presentations/558/efsf2012-whatsapp-scaling.pdf
+    publisher: Erlang Factory
+    author: Rick Reed (WhatsApp)
+    tier: 1
+    published: 2012
+    retrieved: 2026-09-02
+    note: >-
+      Slides rather than prose, and fourteen years old — the specific tuning is dated and
+      the shape of the problem is not. One of very few first-hand accounts that exists.
+
+  - id: rfc-6455
+    title: "RFC 6455 — The WebSocket Protocol"
+    url: https://www.rfc-editor.org/rfc/rfc6455
+    publisher: IETF
+    kind: spec
+    tier: 2
+    published: 2011-12
+    retrieved: 2026-09-02
+
+  - id: mdn-websockets
+    title: "MDN — WebSockets API"
+    url: https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API
+    publisher: Mozilla
+    kind: official_docs
+    tier: 2
+    undated: true
+    retrieved: 2026-09-02
+
+  - id: mdn-sse
+    title: "MDN — Server-sent events"
+    url: https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events
+    publisher: Mozilla
+    kind: official_docs
+    tier: 2
+    undated: true
+    retrieved: 2026-09-02
+    note: Automatic reconnection and event ids, which people re-implement badly over WebSocket
+
+  - id: tail-at-scale
+    title: The Tail at Scale
+    url: https://research.google/pubs/the-tail-at-scale/
+    publisher: Google
+    author: Jeffrey Dean and Luiz André Barroso
+    kind: paper
+    runs_the_system: true
+    tier: 1
+    published: 2013
+    retrieved: 2026-09-02
+    note: Why a read that merges N sources inherits the p99 of N
+
+claims:
+  - id: gateway-and-channel-tiers
+    text: >-
+      Slack separates gateway servers, which hold client connections at the edge, from
+      channel servers, which own channels and are mapped to them by consistent hashing.
+    kind: known
+    sources: [slack-rtm-2023]
+
+  - id: presence-is-a-separate-tier
+    text: >-
+      Presence is handled by its own tier rather than as a property of the messaging path.
+    kind: known
+    sources: [slack-rtm-2023]
+
+  - id: broadcast-multiplication
+    text: >-
+      A single event can produce a large multiple of notifications, because it is
+      broadcast to every channel and member that can observe it, and the multiplier varies
+      by region.
+    kind: known
+    sources: [slack-rtm-2023]
+
+  - id: edge-cache-for-connect
+    text: >-
+      Slack holds the user and channel data a client needs on connect in an edge cache, so
+      that connecting does not fan out requests into the core.
+    kind: known
+    sources: [slack-flannel]
+
+  - id: sse-reconnects-itself
+    text: >-
+      Server-sent events provide automatic reconnection and resumption from an event id as
+      part of the specification.
+    kind: known
+    sources: [mdn-sse]
+
+  - id: fanout-inherits-the-tail
+    text: >-
+      A read that merges N sources completes when the slowest of them completes, so its
+      typical latency approaches the tail of a single source.
+    kind: known
+    sources: [tail-at-scale]
+
+  - id: hybrid-fanout
+    text: >-
+      Large systems fan out on write for ordinary accounts and merge at read time for the
+      few very large ones.
+    kind: inferred
+    sources: [slack-rtm-2023, discord-messages]
+    note: >-
+      **Tier 3 in substance.** The fan-out taxonomy is standard vocabulary with no
+      authoritative source, and we could verify no first-party account of a threshold at
+      any large social platform. The arithmetic in the day-2 lab is illustrative.
+
+  - id: store-then-deliver
+    text: >-
+      Making messages durable with a per-conversation sequence, and treating push as an
+      optimisation, removes the need for per-device queues and delivery guarantees on the
+      push path.
+    kind: inferred
+    sources: [whatsapp-scaling, slack-rtm-2023]
+    note: Our framing of an approach visible in how both systems behave
+
+  - id: reconnect-storms
+    text: >-
+      Restarting a host holding many long-lived connections produces a simultaneous
+      reconnect wave whose rate can exceed the tier's accept capacity.
+    kind: derived
+    note: >-
+      Arithmetic. Discord's post describes reconnection load at scale; the specific rates
+      in the week-8 lab are ours.
+
+  - id: real-fanout-thresholds
+    text: >-
+      What follower or member count large platforms actually use as a fan-out threshold.
+    kind: unknown
+    note: Not published by any platform we could find. Treat any specific figure as folklore.
+
+  - id: per-connection-memory
+    text: >-
+      How much memory a connection actually costs in a given runtime.
+    kind: unknown
+    note: >-
+      Varies by an order of magnitude between runtimes. We deliberately quote no figure;
+      measure yours.

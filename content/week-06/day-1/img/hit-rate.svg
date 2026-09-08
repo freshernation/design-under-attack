@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 320" width="760" height="320" role="img" aria-label="Effective latency against hit rate, showing how much the last few percent matter">
+  <rect width="760" height="320" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="380" y="30" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="700" fill="#0f172a">The last few percent of hit rate carry most of the load</text>
+
+  <g stroke="#94a3b8" stroke-width="1.2" fill="none"><path d="M90 250 H700"/><path d="M90 60 V250"/></g>
+  <g font-family="system-ui,sans-serif" font-size="11" fill="#64748b">
+    <text x="90" y="272" text-anchor="middle">90%</text>
+    <text x="242" y="272" text-anchor="middle">95%</text>
+    <text x="395" y="272" text-anchor="middle">98%</text>
+    <text x="548" y="272" text-anchor="middle">99%</text>
+    <text x="690" y="272" text-anchor="middle">99.5%</text>
+    <text x="380" y="296" text-anchor="middle">cache hit rate</text>
+    <text x="52" y="76" >misses</text>
+    <text x="52" y="92" >per second</text>
+  </g>
+
+  <g font-family="ui-monospace,Menlo,monospace" font-size="10" fill="#334155">
+    <rect x="76" y="76" width="28" height="174" fill="#fca5a5" stroke="#ef4444"/><text x="90" y="70" text-anchor="middle" fill="#b91c1c">40k</text>
+    <rect x="228" y="163" width="28" height="87" fill="#fdba74" stroke="#f97316"/><text x="242" y="157" text-anchor="middle" fill="#9a3412">20k</text>
+    <rect x="381" y="215" width="28" height="35" fill="#fcd34d" stroke="#d97706"/><text x="395" y="209" text-anchor="middle" fill="#92400e">8k</text>
+    <rect x="534" y="233" width="28" height="17" fill="#86efac" stroke="#22c55e"/><text x="548" y="227" text-anchor="middle" fill="#166534">4k</text>
+    <rect x="676" y="241" width="28" height="9" fill="#86efac" stroke="#22c55e"/><text x="690" y="235" text-anchor="middle" fill="#166534">2k</text>
+  </g>
+
+  <rect x="90" y="60" width="610" height="0" fill="none"/>
+  <text x="120" y="120" font-family="system-ui,sans-serif" font-size="11" fill="#334155">400,000 reads a second.</text>
+  <text x="120" y="138" font-family="system-ui,sans-serif" font-size="11" fill="#334155">Going from 95% to 99% hit rate does not</text>
+  <text x="120" y="156" font-family="system-ui,sans-serif" font-size="11" fill="#334155">improve things by 4%. It cuts the load</text>
+  <text x="120" y="174" font-family="system-ui,sans-serif" font-size="11" fill="#334155">reaching your database by <tspan font-weight="700">five times</tspan>.</text>
+  <text x="120" y="200" font-family="system-ui,sans-serif" font-size="11" fill="#b91c1c">And a cache that drops from 99% to 95%</text>
+  <text x="120" y="218" font-family="system-ui,sans-serif" font-size="11" fill="#b91c1c">sends five times the traffic at a database</text>
+  <text x="120" y="236" font-family="system-ui,sans-serif" font-size="11" fill="#b91c1c">sized for one fifth of it.</text>
+</svg>

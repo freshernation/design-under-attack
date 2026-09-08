@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 340" width="760" height="340" role="img" aria-label="A consistent hashing ring before and after adding a node">
+  <rect width="760" height="340" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="380" y="30" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="700" fill="#0f172a">Adding a node: modulo moves everything, a ring moves a slice</text>
+
+  <text x="120" y="62" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#b91c1c">hash(key) % 3</text>
+  <g font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="10">
+    <text x="30" y="86" fill="#334155">k1 &#8594; 1     k1 &#8594; 3  <tspan fill="#b91c1c">moved</tspan></text>
+    <text x="30" y="104" fill="#334155">k2 &#8594; 2     k2 &#8594; 0  <tspan fill="#b91c1c">moved</tspan></text>
+    <text x="30" y="122" fill="#334155">k3 &#8594; 0     k3 &#8594; 1  <tspan fill="#b91c1c">moved</tspan></text>
+    <text x="30" y="140" fill="#334155">k4 &#8594; 1     k4 &#8594; 1  <tspan fill="#15803d">stayed</tspan></text>
+    <text x="30" y="158" fill="#334155">k5 &#8594; 2     k5 &#8594; 2  <tspan fill="#15803d">stayed</tspan></text>
+    <text x="30" y="176" fill="#94a3b8">&#8230;</text>
+  </g>
+  <text x="30" y="206" font-family="system-ui,sans-serif" font-size="11" fill="#b91c1c">Going from 3 nodes to 4 moves about</text>
+  <text x="30" y="222" font-family="system-ui,sans-serif" font-size="11" fill="#b91c1c">three quarters of all keys. Every cache</text>
+  <text x="30" y="238" font-family="system-ui,sans-serif" font-size="11" fill="#b91c1c">is cold at once, on your busiest day.</text>
+
+  <line x1="300" y1="46" x2="300" y2="320" stroke="#cbd5e1" stroke-dasharray="4 4"/>
+
+  <text x="530" y="62" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#15803d">A ring</text>
+  <circle cx="530" cy="190" r="96" fill="none" stroke="#cbd5e1" stroke-width="2"/>
+  <g font-family="system-ui,sans-serif" font-size="11">
+    <circle cx="530" cy="94" r="7" fill="#2563eb"/><text x="530" y="82" text-anchor="middle" fill="#1e3a8a">A</text>
+    <circle cx="613" cy="238" r="7" fill="#2563eb"/><text x="637" y="248" fill="#1e3a8a">B</text>
+    <circle cx="447" cy="238" r="7" fill="#2563eb"/><text x="416" y="248" fill="#1e3a8a">C</text>
+    <circle cx="626" cy="190" r="7" fill="#16a34a"/><text x="648" y="186" fill="#166534">D new</text>
+  </g>
+  <path d="M 530 94 A 96 96 0 0 1 626 190" fill="none" stroke="#16a34a" stroke-width="5" opacity="0.55"/>
+  <g fill="#f59e0b">
+    <circle cx="576" cy="106" r="4"/><circle cx="608" cy="136" r="4"/><circle cx="623" cy="168" r="4"/>
+  </g>
+  <text x="530" y="196" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#64748b">keys go clockwise</text>
+  <text x="530" y="212" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#64748b">to the next node</text>
+
+  <text x="330" y="302" font-family="system-ui,sans-serif" font-size="11" fill="#15803d">Only the keys in the highlighted arc move &#8212; the ones that used to belong to B.</text>
+  <text x="330" y="318" font-family="system-ui,sans-serif" font-size="11" fill="#15803d">About 1/N of the keyspace, and nobody else notices.</text>
+</svg>

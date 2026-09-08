@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.DS_Store
+*.egg-info/
+
+# The instructor materials are a separate private repository, nested here so that
+# `instructor/verify.py` still works locally. Nothing in it is tracked by this repo,
+# and nothing in it has ever been — this line predates the first commit.
+instructor/

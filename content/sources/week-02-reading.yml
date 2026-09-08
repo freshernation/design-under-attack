@@ -1,0 +1,142 @@
+# Week 2's reading, recorded properly.
+
+system: Week 2 reading — queues, utilisation, variability, rate limiting
+
+sources:
+  - id: sre-handling-overload
+    title: "Site Reliability Engineering — Handling Overload"
+    url: https://sre.google/sre-book/handling-overload/
+    publisher: Google
+    kind: official_docs
+    runs_the_system: true
+    tier: 1
+    published: 2016
+    retrieved: 2026-09-02
+    note: Per-client quotas, graceful degradation, and what to do when demand exceeds capacity
+
+  - id: sre-cascading-failures
+    title: "Site Reliability Engineering — Addressing Cascading Failures"
+    url: https://sre.google/sre-book/addressing-cascading-failures/
+    publisher: Google
+    kind: official_docs
+    runs_the_system: true
+    tier: 1
+    published: 2016
+    retrieved: 2026-09-02
+    note: >-
+      The queue-management section is two pages and is the best writing on bounded
+      queues anywhere. Also the source for the retry feedback loop.
+
+  - id: aws-load-shedding
+    title: Using load shedding to avoid overload
+    url: https://aws.amazon.com/builders-library/using-load-shedding-to-avoid-overload/
+    publisher: Amazon Web Services
+    runs_the_system: true
+    tier: 1
+    undated: true
+    retrieved: 2026-09-02
+    note: The argument that rejecting work is a service you provide
+
+  - id: tail-at-scale
+    title: The Tail at Scale
+    url: https://research.google/pubs/the-tail-at-scale/
+    publisher: Google
+    author: Jeffrey Dean and Luiz André Barroso
+    kind: paper
+    runs_the_system: true
+    tier: 1
+    published: 2013
+    retrieved: 2026-09-02
+    note: Where tail latency comes from; hedged requests, tied requests, micro-partitioning
+
+  - id: littles-law-1961
+    title: "A Proof for the Queuing Formula: L = λW"
+    url: https://doi.org/10.1287/opre.9.3.383
+    publisher: Operations Research
+    author: John D. C. Little
+    kind: paper
+    tier: 2
+    published: 1961
+    retrieved: 2026-09-02
+    manual: true
+    note: >-
+      Paywalled. Cited by name and DOI rather than linked usefully, which is honest —
+      the result is one line and the proof is not needed to apply it.
+
+  - id: rfc-6585
+    title: "RFC 6585 — Additional HTTP Status Codes"
+    url: https://www.rfc-editor.org/rfc/rfc6585
+    publisher: IETF
+    kind: spec
+    tier: 2
+    published: 2012-04
+    retrieved: 2026-09-02
+    note: Where 429 Too Many Requests is actually defined, with Retry-After
+
+claims:
+  - id: idle-is-the-shock-absorber
+    text: >-
+      Waiting time rises non-linearly with utilisation, so that each step of 5–10
+      percentage points near the top of the range roughly doubles the wait.
+    kind: known
+    sources: [sre-cascading-failures]
+    note: The M/M/1 formula is standard queueing theory; the operational framing is Google's
+
+  - id: retries-are-arrivals
+    text: >-
+      When a service slows, client retries add load exactly when it is least able to
+      absorb it, which is what turns a slow service into a failing one.
+    kind: known
+    sources: [sre-cascading-failures, aws-load-shedding]
+
+  - id: rejecting-is-a-service
+    text: >-
+      A service that sheds some load and stays up serves its users better than one that
+      accepts everything and completes nothing before the client's timeout.
+    kind: known
+    sources: [aws-load-shedding, sre-handling-overload]
+
+  - id: fanout-inherits-the-tail
+    text: >-
+      A request that waits on many parallel calls finishes at the slowest of them, so a
+      dependency's tail latency becomes the typical latency of the fan-out.
+    kind: known
+    sources: [tail-at-scale]
+
+  - id: hedged-requests
+    text: >-
+      Sending a duplicate request to a second replica after a percentile-based delay
+      substantially reduces tail latency for a small increase in total load.
+    kind: known
+    sources: [tail-at-scale]
+
+  - id: cache-raises-variability
+    text: >-
+      A cache reduces mean service time while making the distribution bimodal, so it can
+      increase queueing even as it improves the average.
+    kind: inferred
+    sources: [tail-at-scale]
+    note: >-
+      Follows from Kingman's approximation plus the bimodal coefficient of variation,
+      both computed in the day-2 lab. No source we found states it in these words.
+
+  - id: peak-factor
+    text: >-
+      In the absence of a measured peak, 5x the daily average is a reasonable planning
+      assumption for single-country consumer traffic.
+    kind: inferred
+    sources: [sre-handling-overload]
+
+  - id: real-world-utilisation-targets
+    text: >-
+      What utilisation large services actually target at peak, as a published figure.
+    kind: unknown
+    note: >-
+      Widely repeated as "60–75%" with no traceable source. We use it as a rule of thumb
+      and label it as one.
+
+  - id: lifo-in-production
+    text: >-
+      Which large services actually run LIFO queue discipline under overload, and at
+      what threshold they switch.
+    kind: unknown

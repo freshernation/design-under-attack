@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 290" width="760" height="290" role="img" aria-label="Static batching wasting the accelerator versus continuous batching filling it">
+  <rect width="760" height="290" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="380" y="30" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="700" fill="#0f172a">The batch finishes when its slowest member does &#8212; unless you refill it</text>
+
+  <text x="30" y="62" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#b91c1c">Static batching</text>
+  <g font-family="ui-monospace,Menlo,monospace" font-size="10">
+    <rect x="30" y="76" width="60" height="18" rx="2" fill="#93c5fd"/><rect x="90" y="76" width="230" height="18" rx="2" fill="#e2e8f0"/>
+    <text x="330" y="90" fill="#64748b">short reply, then idle</text>
+    <rect x="30" y="100" width="110" height="18" rx="2" fill="#93c5fd"/><rect x="140" y="100" width="180" height="18" rx="2" fill="#e2e8f0"/>
+    <rect x="30" y="124" width="290" height="18" rx="2" fill="#93c5fd"/>
+    <text x="330" y="138" fill="#64748b">the slow one everyone waits for</text>
+    <rect x="30" y="148" width="80" height="18" rx="2" fill="#93c5fd"/><rect x="110" y="148" width="210" height="18" rx="2" fill="#e2e8f0"/>
+  </g>
+  <text x="30" y="188" font-family="system-ui,sans-serif" font-size="11" fill="#b91c1c">Grey is an idle accelerator. Three of the four</text>
+  <text x="30" y="206" font-family="system-ui,sans-serif" font-size="11" fill="#b91c1c">finished long ago and their slots are wasted.</text>
+
+  <line x1="380" y1="46" x2="380" y2="266" stroke="#cbd5e1" stroke-dasharray="4 4"/>
+
+  <text x="410" y="62" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#15803d">Continuous batching</text>
+  <g font-family="ui-monospace,Menlo,monospace" font-size="10">
+    <rect x="410" y="76" width="60" height="18" rx="2" fill="#86efac"/><rect x="472" y="76" width="90" height="18" rx="2" fill="#4ade80"/><rect x="564" y="76" width="140" height="18" rx="2" fill="#86efac"/>
+    <rect x="410" y="100" width="110" height="18" rx="2" fill="#86efac"/><rect x="522" y="100" width="182" height="18" rx="2" fill="#4ade80"/>
+    <rect x="410" y="124" width="294" height="18" rx="2" fill="#86efac"/>
+    <rect x="410" y="148" width="80" height="18" rx="2" fill="#86efac"/><rect x="492" y="148" width="120" height="18" rx="2" fill="#4ade80"/><rect x="614" y="148" width="90" height="18" rx="2" fill="#86efac"/>
+  </g>
+  <text x="410" y="188" font-family="system-ui,sans-serif" font-size="11" fill="#15803d">A finished slot is refilled immediately from the</text>
+  <text x="410" y="206" font-family="system-ui,sans-serif" font-size="11" fill="#15803d">queue. The accelerator stays busy; throughput</text>
+  <text x="410" y="224" font-family="system-ui,sans-serif" font-size="11" fill="#15803d">rises several-fold on the same hardware.</text>
+
+  <text x="30" y="250" font-family="system-ui,sans-serif" font-size="11" fill="#334155">This is week 2 with an expensive server: the batch is a queue, and its cost is the slowest member&#8217;s service time.</text>
+  <text x="30" y="268" font-family="system-ui,sans-serif" font-size="11" fill="#64748b">Everything you know about utilisation, variability and admission control applies unchanged.</text>
+</svg>

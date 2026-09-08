@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" width="760" height="300" role="img" aria-label="Four remedies for a hot key, each with its cost">
+  <rect width="760" height="300" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="380" y="30" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="700" fill="#0f172a">One key is 40% of the traffic. Four answers, four prices.</text>
+
+  <g font-family="system-ui,sans-serif" font-size="12">
+    <g>
+      <rect x="28" y="52" width="345" height="104" rx="6" fill="#fff" stroke="#93c5fd"/>
+      <text x="44" y="74" font-weight="700" fill="#1e3a8a">Split the key</text>
+      <text x="44" y="96" fill="#334155">write to hot#0 &#8230; hot#15, read all sixteen</text>
+      <text x="44" y="122" fill="#64748b">Cost: every read of that key is now a</text>
+      <text x="44" y="140" fill="#64748b">16-way fan-out, so its tail is the p99 of 16.</text>
+    </g>
+    <g>
+      <rect x="387" y="52" width="345" height="104" rx="6" fill="#fff" stroke="#86efac"/>
+      <text x="403" y="74" font-weight="700" fill="#166534">Replicate the key</text>
+      <text x="403" y="96" fill="#334155">extra copies on other nodes, read any</text>
+      <text x="403" y="122" fill="#64748b">Cost: writes go to every copy, and the</text>
+      <text x="403" y="140" fill="#64748b">copies can disagree. Reads only.</text>
+    </g>
+    <g>
+      <rect x="28" y="166" width="345" height="104" rx="6" fill="#fff" stroke="#fcd34d"/>
+      <text x="44" y="188" font-weight="700" fill="#92400e">Cache in front</text>
+      <text x="44" y="210" fill="#334155">the hottest keys are the easiest to cache</text>
+      <text x="44" y="236" fill="#64748b">Cost: staleness, and a cold cache sends</text>
+      <text x="44" y="254" fill="#64748b">the whole spike straight at the partition.</text>
+    </g>
+    <g>
+      <rect x="387" y="166" width="345" height="104" rx="6" fill="#fff" stroke="#fca5a5"/>
+      <text x="403" y="188" font-weight="700" fill="#991b1b">Coalesce requests</text>
+      <text x="403" y="210" fill="#334155">1,000 concurrent misses become one fetch</text>
+      <text x="403" y="236" fill="#64748b">Cost: nothing much, and it is the most</text>
+      <text x="403" y="254" fill="#64748b">under-used answer on this page.</text>
+    </g>
+  </g>
+</svg>

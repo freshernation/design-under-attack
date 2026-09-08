@@ -1,0 +1,221 @@
+# Week 5's reading, recorded properly.
+
+system: Week 5 reading — replication, quorums, consensus, consistency
+
+sources:
+  - id: dynamo-2007
+    title: "Dynamo: Amazon's Highly Available Key-value Store"
+    url: https://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf
+    publisher: Amazon
+    author: DeCandia et al.
+    kind: paper
+    runs_the_system: true
+    tier: 1
+    published: 2007
+    retrieved: 2026-09-02
+    note: §4.4 version vectors, §4.5–4.6 quorums, sloppy quorums and hinted handoff
+
+  - id: spanner-2012
+    title: "Spanner: Google's Globally-Distributed Database"
+    url: https://research.google/pubs/spanner-googles-globally-distributed-database-2/
+    publisher: Google
+    author: Corbett et al.
+    kind: paper
+    runs_the_system: true
+    tier: 1
+    published: 2012
+    retrieved: 2026-09-02
+    note: The opposite choice to Dynamo, with the latency cost measured
+
+  - id: jepsen-consistency
+    title: Consistency models
+    url: https://jepsen.io/consistency
+    publisher: Jepsen
+    author: Kyle Kingsbury
+    tier: 1
+    undated: true
+    retrieved: 2026-09-02
+    note: >-
+      Independent rather than first-party, but primary for the map itself — this is the
+      reference practitioners cite, maintained by the person who tests these systems.
+
+  - id: jepsen-analyses
+    title: Jepsen analyses
+    url: https://jepsen.io/analyses
+    publisher: Jepsen
+    author: Kyle Kingsbury
+    tier: 1
+    undated: true
+    retrieved: 2026-09-02
+    note: Real databases tested against their own claims, with the methodology published
+
+  - id: raft-paper
+    title: In Search of an Understandable Consensus Algorithm
+    url: https://raft.github.io/raft.pdf
+    publisher: USENIX ATC
+    author: Diego Ongaro and John Ousterhout
+    kind: paper
+    tier: 2
+    published: 2014
+    retrieved: 2026-09-02
+    note: §5.1–5.2 are the day-3 lab
+
+  - id: raft-site
+    title: The Raft Consensus Algorithm
+    url: https://raft.github.io/
+    publisher: Raft authors
+    kind: official_docs
+    runs_the_system: true
+    tier: 1
+    undated: true
+    retrieved: 2026-09-02
+    note: The authors' own site, including the visualisation
+
+  - id: etcd-api
+    title: "etcd — API learning"
+    url: https://etcd.io/docs/v3.5/learning/api/
+    publisher: etcd
+    kind: official_docs
+    tier: 2
+    undated: true
+    retrieved: 2026-09-02
+    note: What a consensus system looks like from outside — leases, revisions, watches
+
+  - id: zookeeper-overview
+    title: ZooKeeper Overview
+    url: https://zookeeper.apache.org/doc/current/zookeeperOver.html
+    publisher: Apache ZooKeeper
+    kind: official_docs
+    tier: 2
+    undated: true
+    retrieved: 2026-09-02
+
+  - id: cassandra-dynamo
+    title: "Cassandra — Dynamo-derived architecture"
+    url: https://cassandra.apache.org/doc/latest/cassandra/architecture/dynamo.html
+    publisher: Apache Cassandra
+    kind: official_docs
+    tier: 2
+    undated: true
+    retrieved: 2026-09-02
+    note: Last-write-wins and consistency levels in production documentation
+
+  - id: kleppmann-locking
+    title: How to do distributed locking
+    url: https://martin.kleppmann.com/2016/02/08/how-to-do-distributed-locking.html
+    publisher: Martin Kleppmann
+    author: Martin Kleppmann
+    tier: 3
+    published: 2016-02-08
+    retrieved: 2026-09-02
+    note: >-
+      A tier boundary worth noticing. This is analysis by someone who does not operate the
+      system being analysed, so it is tier 3 by our rule — but it is the *origin* of the
+      fencing-token argument, which makes it primary for that specific claim. Our tiers
+      describe proximity to a system, not quality, and this is where the two come apart.
+
+  - id: redis-locks
+    title: "Redis — Distributed locks"
+    url: https://redis.io/docs/latest/develop/clients/patterns/distributed-locks/
+    publisher: Redis
+    kind: official_docs
+    runs_the_system: true
+    tier: 1
+    undated: true
+    retrieved: 2026-09-02
+    note: The other side of the same argument, from the project itself
+
+claims:
+  - id: async-loses-acknowledged-writes
+    text: >-
+      With asynchronous replication, writes the leader has acknowledged can be lost when
+      the leader fails and a follower is promoted.
+    kind: known
+    sources: [dynamo-2007, raft-paper]
+
+  - id: quorum-overlap
+    text: >-
+      When W + R > N, every read set intersects every write set, so a read sees at least
+      one copy of the most recent completed write.
+    kind: known
+    sources: [dynamo-2007, cassandra-dynamo]
+
+  - id: quorum-is-not-linearizable
+    text: >-
+      A quorum system satisfying W + R > N is still weaker than linearizable — concurrent
+      and partial writes leave cases the overlap says nothing about.
+    kind: known
+    sources: [jepsen-consistency, dynamo-2007]
+
+  - id: sloppy-quorum-drops-the-guarantee
+    text: >-
+      A sloppy quorum accepts writes on any reachable nodes, so the overlap guarantee does
+      not hold during exactly the failures it was meant to cover.
+    kind: known
+    sources: [dynamo-2007]
+
+  - id: version-vectors
+    text: >-
+      Dynamo keeps concurrent versions and returns them to the client for resolution
+      rather than picking a winner, because only the application knows what the data means.
+    kind: known
+    sources: [dynamo-2007]
+
+  - id: majority-prevents-two-leaders
+    text: >-
+      A node votes at most once per term and a leader needs a majority, so two leaders
+      cannot be elected in the same term.
+    kind: known
+    sources: [raft-paper]
+
+  - id: randomised-timeouts
+    text: >-
+      Randomising election timeouts is what resolves split votes; without it candidates
+      can repeatedly time out together.
+    kind: known
+    sources: [raft-paper]
+
+  - id: fencing-tokens
+    text: >-
+      A lock or lease is not sufficient to protect shared storage, because the holder can
+      be paused arbitrarily; the storage system must reject writes carrying a superseded
+      token.
+    kind: known
+    sources: [kleppmann-locking, redis-locks]
+    note: >-
+      Tier 3 by our rule and primary for this argument. Redis's own documentation engages
+      with it directly, which is why both are cited.
+
+  - id: session-guarantees-are-cheap
+    text: >-
+      Read-your-writes and monotonic reads can be provided with a per-client version token
+      and do not require consensus or a majority round trip.
+    kind: inferred
+    sources: [jepsen-consistency]
+    note: >-
+      The models are defined in the source; the claim that most products need only these
+      two, and the cost comparison, is ours.
+
+  - id: check-quorum
+    text: >-
+      A leader that cannot reach a majority must step down, or it will keep accepting
+      writes on the minority side of a partition.
+    kind: inferred
+    sources: [raft-paper]
+    note: >-
+      A practical extension rather than part of basic Raft. Widely implemented; the paper
+      discusses the need without making it part of the core algorithm.
+
+  - id: real-lease-durations
+    text: >-
+      What lease durations large systems actually run, and how often spurious expiries
+      occur under load.
+    kind: unknown
+
+  - id: partition-frequency
+    text: >-
+      How often network partitions actually occur in production datacentre networks.
+    kind: unknown
+    note: >-
+      Widely asserted as "more often than you think" with no measurement attached. Treat
+      any specific frequency you are told with suspicion.

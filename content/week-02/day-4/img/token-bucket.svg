@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 290" width="760" height="290" role="img" aria-label="A token bucket: tokens refill at a steady rate, requests spend them">
+  <rect width="760" height="290" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="380" y="30" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="700" fill="#0f172a">Token bucket — a steady rate, plus a burst you can save up for</text>
+
+  <g stroke="#60a5fa" stroke-width="2" fill="none" marker-end="url(#tb)">
+    <path d="M120 70 V116"/>
+  </g>
+  <defs><marker id="tb" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="#60a5fa"/></marker></defs>
+  <text x="136" y="80" font-family="system-ui,sans-serif" font-size="12" fill="#334155">refill: 10 tokens/second, always</text>
+
+  <path d="M76 124 H164 V216 H76 Z" fill="#eff6ff" stroke="#93c5fd" stroke-width="2"/>
+  <g fill="#60a5fa">
+    <circle cx="96" cy="200" r="7"/><circle cx="120" cy="200" r="7"/><circle cx="144" cy="200" r="7"/>
+    <circle cx="96" cy="182" r="7"/><circle cx="120" cy="182" r="7"/><circle cx="144" cy="182" r="7"/>
+    <circle cx="108" cy="164" r="7"/><circle cx="132" cy="164" r="7"/>
+  </g>
+  <text x="120" y="238" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#1e3a8a">capacity 50</text>
+  <text x="120" y="256" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#64748b">the burst you may save up</text>
+
+  <g stroke="#94a3b8" stroke-width="1.6" fill="none" marker-end="url(#tb2)"><path d="M172 170 H262"/></g>
+  <defs><marker id="tb2" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="#94a3b8"/></marker></defs>
+
+  <g font-family="system-ui,sans-serif" font-size="12">
+    <rect x="270" y="120" width="200" height="46" rx="6" fill="#dcfce7" stroke="#86efac"/>
+    <text x="286" y="140" font-weight="600" fill="#166534">a token is available</text>
+    <text x="286" y="158" fill="#334155">serve it, spend one token</text>
+
+    <rect x="270" y="180" width="200" height="46" rx="6" fill="#fee2e2" stroke="#fca5a5"/>
+    <text x="286" y="200" font-weight="600" fill="#991b1b">the bucket is empty</text>
+    <text x="286" y="218" fill="#334155">429, with Retry-After</text>
+  </g>
+
+  <rect x="494" y="110" width="238" height="126" rx="6" fill="#fff" stroke="#cbd5e1"/>
+  <text x="510" y="132" font-family="system-ui,sans-serif" font-size="12" font-weight="600" fill="#0f172a">Two knobs, two meanings</text>
+  <g font-family="system-ui,sans-serif" font-size="11" fill="#334155">
+    <text x="510" y="156">refill rate = the sustained rate</text>
+    <text x="510" y="176">you are willing to serve</text>
+    <text x="510" y="200">capacity = how much idleness</text>
+    <text x="510" y="220">may be redeemed at once</text>
+  </g>
+</svg>
