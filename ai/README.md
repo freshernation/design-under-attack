@@ -2,9 +2,8 @@
 
 One AI, six characters. Which one you open matters more than what you type into it.
 
-The roles come from the ALTER framework (`instructor/alter-framework-prompts.md`) —
-Advisor, Librarian, Tutor, Editor, Roommate — plus two this course needs: an
-Interviewer and a Defence partner.
+Four of them are general — Librarian, Tutor, Editor and Roommate — and two are what this
+course specifically needs: an **Interviewer** and a **Defence partner**.
 
 The **Advisor** role is missing on purpose. This repo *is* the advisor's output: the
 destination, the sequence, the cut list and the milestones were all decided before you
